@@ -629,6 +629,9 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 }
 
 #plan .plan-button .btn {
+
+/* 白色按钮外框*/
+
   background: transparent;
   border: 4px solid #ffffff;
   border-radius: 0;
@@ -846,3 +849,4 @@ footer h2 {
     font-size: 11px;
   }
 }
+
