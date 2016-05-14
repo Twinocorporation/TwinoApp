@@ -8,6 +8,7 @@ http://www.tooplate.com/view/2078-adventure
 
 /* Body 
 ------------------------------------- */
+
 body {
     background: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
@@ -329,6 +330,7 @@ hr {
 }
 
 .bx-controls-direction {
+  display:none;
   position: absolute;
   text-align: right;
   bottom: 80px;
