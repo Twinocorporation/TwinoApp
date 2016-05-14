@@ -1,3 +1,10 @@
+<%-- 
+    Document   : recevoirservice
+    Created on : 14 mai 2016, 16:17:58
+    Author     : user
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -47,9 +54,14 @@ and open the template in the editor.
 
 </head>
     <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
-        <!-- Contact section
+        
+        <header>
+            <a href="index.html" style="text-decoration:none;"><font color="black"><h1> Twino </h1></font></a>
+</header>
+        
+        <!-- connexion section
 ================================================== -->
-<section id="contact" class="parallax-section">
+<section id="contact" class="parallax-section" >
 	<div class="container">
 		<div class="row">
 
@@ -110,14 +122,7 @@ and open the template in the editor.
 			<div class="col-md-12 col-sm-12">
 
 				<h2 class="wow bounceIn">Twnio</h2>
-				<ul class="social-icon">
-					<li><a href="#" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
-					<li><a href="#" class="fa fa-twitter wow fadeIn" data-wow-delay="0.6s"></a></li>
-					<li><a href="#" class="fa fa-dribbble wow fadeIn" data-wow-delay="0.9s"></a></li>
-					<li><a href="#" class="fa fa-behance wow fadeIn" data-wow-delay="1s"></a></li>
-					<li><a href="#" class="fa fa-github wow fadeIn" data-wow-delay="1.3s"></a></li>
-					<li><a href="#" class="fa fa-tumblr wow fadeIn" data-wow-delay="1.6s"></a></li>
-				</ul>
+				
 				<p>2016 Twnio 
                 
                 | Design: <a rel="nofollow" href="http://www.tooplate.com" target="_parent">Twnio</a></p>
@@ -143,3 +148,4 @@ and open the template in the editor.
 
 </body>
 </html>
+
