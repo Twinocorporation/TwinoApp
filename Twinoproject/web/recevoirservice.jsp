@@ -69,7 +69,7 @@ and open the template in the editor.
 			================================================== -->
 			<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 				<div class="section-title">
-					<h5 class="wow bounceIn">Connectes toi</h5>
+					<h5 class="wow bounceIn">Connectes toi en tant que client</h5>
 					<h1 class="heading">Connexion</h1>
 					<hr>
 				</div>
