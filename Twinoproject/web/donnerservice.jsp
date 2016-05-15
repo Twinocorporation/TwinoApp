@@ -48,6 +48,7 @@
 
 
 </head>
+ <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 <header>
 <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
 	<div class="container">
