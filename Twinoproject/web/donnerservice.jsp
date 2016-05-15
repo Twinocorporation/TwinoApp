@@ -87,7 +87,7 @@
 			<!-- Contact form section
 			================================================== -->
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
-				<form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.6s">
+				<form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.3s">
 					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 						<input type="text" class="form-control" placeholder="邮箱" name="name">
 					</div>
@@ -109,11 +109,11 @@
 			================================================== -->
 			<div class="contact-detail col-md-12 col-sm-12">
 				<div class="col-md-6 col-sm-6">
-					<h3><i class="icon-envelope medium-icon wow bounceIn" data-wow-delay="0.6s"></i> EMAIL</h3>
+					<h3><i class="icon-envelope medium-icon wow bounceIn" data-wow-delay="0.3s"></i> EMAIL</h3>
 					<p>hello@company.com</p>
 				</div>
 				<div class="col-md-6 col-sm-6">
-					<h3><i class="icon-phone medium-icon wow bounceIn" data-wow-delay="0.6s"></i> PHONES</h3>
+					<h3><i class="icon-phone medium-icon wow bounceIn" data-wow-delay="0.3s"></i> PHONES</h3>
 					<p>010-010-0110 | 090-090-0990</p>
 				</div>
 			</div>
