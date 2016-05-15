@@ -55,8 +55,22 @@ and open the template in the editor.
 </head>
     <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
         
-        <header>
-            <a href="index.html" style="text-decoration:none;"><font color="black"><h1> Twino </h1></font></a>
+<header>
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+	<div class="container">
+
+		<div class="navbar-header">
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon icon-bar"></span>
+				<span class="icon icon-bar"></span>
+				<span class="icon icon-bar"></span>
+			</button>
+                    <a href="index.html" class="smoothScroll navbar-brand" >Twino</a>
+		</div>
+
+
+	</div>
+</section>
 </header>
         
         <!-- connexion section
