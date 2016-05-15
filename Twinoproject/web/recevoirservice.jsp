@@ -69,8 +69,8 @@ and open the template in the editor.
 			================================================== -->
 			<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 				<div class="section-title">
-					<h5 class="wow bounceIn">Connectes toi en tant que client</h5>
-					<h1 class="heading">Connexion</h1>
+					<h5 class="wow bounceIn">我刚来法国，我想找服务(ﾟДﾟ≡ﾟдﾟ)!?</h5>
+					<h1 class="heading">登录</h1>
 					<hr>
 				</div>
 			</div>
@@ -80,18 +80,18 @@ and open the template in the editor.
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
 				<form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.6s">
 					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="text" class="form-control" placeholder="Email" name="name">
+						<input type="text" class="form-control" placeholder="邮箱" name="name">
 					</div>
 					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="email" class="form-control" placeholder="Mot de passe" name="email">
+						<input type="email" class="form-control" placeholder="密码" name="email">
 					</div>
 					
 					
 					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="submit" class="form-control" value="Connecter">
+						<input type="submit" class="form-control" value="登录">
 					</div>
                                     <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="submit" class="form-control" value="Inscrivez vous">
+						<input type="submit" class="form-control" value="注册">
 					</div>
 				</form>
 			</div>
