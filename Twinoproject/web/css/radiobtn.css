@@ -65,7 +65,7 @@ input[type="checkbox"] + label span {
 
 input[type="checkbox"]:checked + label span{
      background-color:#ffa400;
-      border: 3px solid white
+      border: 3px solid white;
 }
 
 input[type="checkbox"] + label span,
@@ -73,3 +73,7 @@ input[type="checkbox"]:checked + label span {
   -o-transition:background-color 0.4s linear;
   transition:background-color 0.4s linear;
 }
+
+#checkbox1  
+{background-color:#ffa400;
+      border: 3px solid white}

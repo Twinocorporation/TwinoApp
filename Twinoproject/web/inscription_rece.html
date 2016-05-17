@@ -55,7 +55,10 @@ and open the template in the editor.
     <link href='https://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
 
 </head>
-<body>
+<body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+    <header><div class="container"><h1><a href="index.html" style="text-decoration: none; font-family:Arial, Helvetica, sans-serif; font-weight: 600;font-size: 24px; padding: 11px 15px; border: 4px solid black; " ><font color=black >Twino</font></a></h1></div></header>
+
     <section id="contact" class="parallax-section" >
         <div class="container">
             <div class="row">
@@ -67,60 +70,80 @@ and open the template in the editor.
                     </div>
                 </div>
                 <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-                    <div class="col-md-2 col-sm-3" style="height:54px">
 
-                        <input type="radio" id="radio01" name="radio" />
-                        <label for="radio01"><span></span>男生</label>
-                    </div>
 
-                    <div class="col-md-2 col-sm-3" style="height:54px">
-                        <input type="radio" id="radio02" name="radio" />
-                        <label for="radio02"><span></span>女生</label>
-                    </div>
-                    <div class="col-md-8 col-sm-12" style="height: 54px">
-
-                    </div>
                     <form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="col-md-12 col-sm-18" style="height: 35px; border-bottom: 3px solid #eee; font-size: 25px; text-align: center">
+                            以下为必填信息
+                        </div> 
+                        <div class="col-md-2 col-sm-3" style="height:35px">
+
+
+                            <input type="radio" id="radio01" name="radio" >
+                            <label for="radio01"><span></span>男生</label>
+                        </div>
+
+                        <div class="col-md-2 col-sm-3" style="height:35px">
+                            <input type="radio" id="radio02" name="radio" >
+                            <label for="radio02"><span></span>女生</label>
+                        </div>
+                        <div class="col-md-8 col-sm-0" style="height:35px">
+
+                        </div>
 
                         <div class="col-md-4 col-sm-18">
-                            <input type="text" class="form-control" placeholder="姓氏" name="client_nom">
+                            <input type="text" class="form-control" placeholder="姓氏" name="server_nom">
                         </div>
                         <div class="col-md-4 col-sm-18">
-                            <input type="text" class="form-control" placeholder="名字" name="client_prenom">
+                            <input type="text" class="form-control" placeholder="名字" name="server_prenom">
                         </div>
                         <div class="col-md-4 col-sm-18">
-                            <input type="text" class="form-control" placeholder="生日:yyyy-mm-dd" name="client_birthday">
+                            <input type="text" class="form-control" placeholder="生日:yyyy-mm-dd" name="server_birthday">
                         </div>
 
                         <div class="col-md-12 col-sm-18">
-                            <input type="text" class="form-control" placeholder="邮箱" name="client_mail">
+                            <input type="text" class="form-control" placeholder="邮箱" name="server_mail">
                         </div>
                         <div class="col-md-6 col-sm-18">
-                            <input type="password" class="form-control" placeholder="密码" name="client_password">
+                            <input type="password" class="form-control" placeholder="密码" name="server_password">
                         </div>                       
                         <div class="col-md-6 col-sm-18" >
-                            <input type="password" class="form-control" placeholder="确认密码" name="client_password_2">
+                            <input type="password" class="form-control" placeholder="确认密码" name="server_password_2">
                         </div> 
-                        <div class="col-md-12 col-sm-18" style="border-top:3px solid #eee">
+
+
+
+                        <div class="col-md-12 col-sm-18" style="height: 35px; border-bottom: 3px solid #eee; font-size: 25px; text-align: center">
+                            以下为选填信息
+                        </div> 
+                        <div class="col-md-12 col-sm-18" >
                             <input type="password" class="form-control" placeholder="照片" name="照片">
                         </div> 
                         <div class="col-md-12 col-sm-18">
-                            <input type="text" class="form-control" placeholder="电话号码" name="client_phone">
-
-                            <div class="col-md-12 col-sm-18" style="height:54px">
-
-                                <input type="checkbox" id="checkbox" name="client_right" />
-                                <label for="checkbox"><span></span>我已阅读并同意相关服务条款和隐私政策</label>
-                            </div>
-                            <div class="blackbutton_home" style="margin-top: 15px">
-                                <a href="recevoirservice.jsp" ><button class="btn btn-default">提交注册</button></a>
-                            </div>
+                            <input type="text" class="form-control" placeholder="电话号码" name="server_phone">
                         </div>
+
+                        <div class="col-md-12 col-sm-18" style="height: 54px; border-bottom: 3px solid #eee">
+                        </div>  
+
+
+
+
+                        <div class="col-md-12 col-sm-18" style="height:54px">
+
+                            <input type="checkbox" id="checkbox4"  name="client_right" />
+                            <label for="checkbox4"><span></span>我已阅读并同意相关服务条款和隐私政策</label>
+                        </div>
+                        <div class="blackbutton_home" style="margin-top: 15px">
+                            <a href="recevoirservice.jsp" ><button class="btn btn-default">提交注册</button></a>
+                        </div>
+
 
                     </form>
                 </div>
 
             </div>
+        </div>
     </section>
 
 
