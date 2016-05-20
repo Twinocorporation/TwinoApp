@@ -86,7 +86,14 @@
 
 			<!-- Contact form section
 			================================================== -->
-			<div class="col-md-offset-1 col-md-10 col-sm-12">
+			<script type="text/javascript">  
+
+    function _inscrire() {  
+        window.navigate("inscriretigong.jsp"); ;  
+         
+    }  
+</script>
+                        <div class="col-md-offset-1 col-md-10 col-sm-12">
 				<form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.3s">
 					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 						<input type="text" class="form-control" placeholder="邮箱" name="name">
@@ -100,7 +107,7 @@
 						<input type="submit" class="form-control" value="登录">
 					</div>
                                     <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="submit" class="form-control" value="注册">
+                                        <input type="button" onclick="_inscrire()" class="form-control" value="注册" />
 					</div>
 				</form>
 			</div>
