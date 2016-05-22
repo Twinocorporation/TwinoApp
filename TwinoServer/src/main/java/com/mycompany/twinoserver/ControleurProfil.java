@@ -5,6 +5,10 @@
  */
 package com.mycompany.twinoserver;
 
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.model.GeocodingResult;
+import com.google.maps.model.LatLng;
 
 import com.mycompany.twinoserver.dao.DAOException;
 import com.mycompany.twinoserver.dao.EvaluerDAO;
@@ -259,3 +263,171 @@ public class ControleurProfil extends HttpServlet {
         GeocodingResult[] results;
         String adresse = null;
         results = GeocodingApi.newRequest(context).latlng(new LatLng(latitude, longitude)).await(); //.latlng(new LatLng(latitude, longitude)).await();
+
+        System.out.println(results[0].geometry);
+        adresse = results[0].formattedAddress;
+        return adresse;
+    }
+
+    /**
+     * Créer son compte
+     */
+    private void actionInscription(HttpServletRequest request,
+            HttpServletResponse response,
+            ProfilDAO profilDAO)
+            throws IOException, ServletException, DAOException {
+        //on envoie les compétences possibles
+        request.setAttribute("competences", profilDAO.getCompetences());
+        getServletContext().getRequestDispatcher(
+                "/WEB-INF/inscription_1.jsp").forward(request, response);
+    }
+
+    /**
+     * Se connecter
+     */
+    private void actionConnexion(HttpServletRequest request,
+            HttpServletResponse response,
+            TacheDAO tDAO)
+            throws IOException, ServletException, DAOException {
+        getServletContext().getRequestDispatcher(
+                "/WEB-INF/connexion_1.jsp").forward(request, response);
+    }
+
+    /**
+     * Créer un utilisateur
+     */
+    private void actionCreerUtilisateur(HttpServletRequest request,
+            HttpServletResponse response,
+            ProfilDAO profilDAO)
+            throws IOException, ServletException, DAOException {
+        String adresseMail = request.getParameter("adresseMail");
+        String mdp = request.getParameter("mdp");
+        String s = request.getParameter("s");
+        String nom = request.getParameter("nom");
+        String prenom = request.getParameter("prenom");
+        String sexe = request.getParameter("sexe");
+        String dateNaissance = request.getParameter("dateNaissance");
+        Float latitudeT = Float.parseFloat((String) request.getAttribute("latitudeT"));
+        Float longitudeT = Float.parseFloat((String) request.getAttribute("longitudeT"));
+        String[] competences = request.getParameterValues("competences");
+
+        request.setAttribute("competences", profilDAO.getCompetences());
+        if (competences != null) {
+            request.setAttribute("competences_selected", new LinkedList(Arrays.asList(competences)));
+        }
+
+        if (adresseMail == null || mdp == null || nom == null || prenom == null
+                || sexe == null || dateNaissance == null || s == null
+                || adresseMail.equals("") || mdp.equals("")
+                || s.equals("") || nom.equals("") || prenom.equals("")
+                || dateNaissance.equals("") || sexe.equals("")) {
+            request.setAttribute("manquant", "oui");
+            getServletContext().getRequestDispatcher("/WEB-INF/inscription_1.jsp").
+                    forward(request, response);
+        } else if (!mdp.equals(s)) {
+            request.setAttribute("mdp", "oui");
+            getServletContext().getRequestDispatcher("/WEB-INF/inscription_1.jsp").
+                    forward(request, response);
+        } else {
+            profilDAO.ajouterUtilisateur(adresseMail, mdp, nom, prenom,
+                    Integer.parseInt(sexe),
+                    dateNaissance, latitudeT, longitudeT, competences);
+            //TacheDAO tDAO = new TacheDAO(ds);
+            this.actionMenuProfil(request, response, profilDAO);
+        }
+    }
+
+    /**
+     * Redirige vers la page qui permet de menu du profil qui propose de
+     * modifier son profil, de voir ses annonces, ses tâches en cours
+     * d'exécution,...
+     */
+    private void actionMenuProfil(HttpServletRequest request,
+            HttpServletResponse response,
+            ProfilDAO profilDAO)
+            throws IOException, ServletException, DAOException {
+
+        HttpSession session = request.getSession(true);
+        LinkedList<TacheAtom> ta = null;
+        String utilisateur = (String) session.getAttribute("utilisateur");
+        String check = request.getParameter("action");
+        if (utilisateur == null && check.equals("rechercherparville")) {
+            session.setAttribute("utilisateur", (request.getParameter("prenom")));
+            session.setAttribute("latitude", (String) request.getAttribute("latitudeT"));
+            session.setAttribute("longitude", (String) request.getAttribute("longitudeT"));
+            session.setAttribute("email", request.getParameter("adresseMail"));
+        }
+        LinkedList<String> competences = profilDAO.getCompetences((String) session.getAttribute("email"));
+        float latitudeU = Float.parseFloat((String) session.getAttribute("latitude"));
+        float longitudeU = Float.parseFloat((String) session.getAttribute("longitude"));
+        TacheDAO tDAO = new TacheDAO(ds);
+        if (competences == null) {
+            ta = tDAO.search(null, "", "", latitudeU, longitudeU, -10, 30, (String) session.getAttribute("email"));
+        } else {
+            String[] compet = new String[100];
+            int k = 0;
+            for (String comp : competences) {
+                compet[k] = comp;
+                k++;
+            }
+            ta = tDAO.search(compet, "", "", latitudeU, longitudeU, -10, 30, (String) session.getAttribute("email"));
+        }
+        if (ta.size() == 0) {
+            ta = tDAO.search(null, "", "", latitudeU, longitudeU, -10, 100000, (String) session.getAttribute("email"));
+        }
+        request.setAttribute("tacheAtom", ta);
+        request.setAttribute("competences", competences);
+        getServletContext().getRequestDispatcher("/WEB-INF/votreProfil_1.jsp").forward(request, response);
+    }
+
+    /**
+     * Consultation du profile
+     */
+    private void actionConsulter(HttpServletRequest request,
+            HttpServletResponse response, ProfilDAO profilDAO, EvaluerDAO eDAO,
+            TacheDAO tDAO) throws DAOException, ServletException, IOException {
+        String exec = request.getParameter("ident");
+        Profil execProfil = profilDAO.getProfil(exec);
+        request.setAttribute("exec", execProfil);
+        request.setAttribute("evals", eDAO.getListeEval(exec));
+        getServletContext().getRequestDispatcher("/WEB-INF/autreprofil_1.jsp").forward(request, response);
+    }
+
+    /**
+     * Permet de connecter l'utilisateur s'il a mis les bon login et mdp
+     */
+    private void actionConnectera(HttpServletRequest request,
+            HttpServletResponse response,
+            TacheDAO tDAO, ProfilDAO profilDAO) throws DAOException, ServletException, IOException {
+
+        String login = request.getParameter("email");
+        String password = request.getParameter("mdp");
+        String user = "null";
+        Profil connexion = profilDAO.verifieconnexion(login, password);
+
+        if (connexion != null) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("utilisateur", (connexion.getPrenom()));
+            session.setAttribute("latitude", String.valueOf(connexion.getLatitudeU()));
+            session.setAttribute("longitude", String.valueOf(connexion.getLongitudeU()));
+            session.setAttribute("email", login);
+            this.actionAfficher(request, response, tDAO);
+        } else {
+            request.setAttribute("user", user);
+            getServletContext().getRequestDispatcher("/WEB-INF/connexion_1.jsp").forward(request, response);
+        }
+
+    }
+
+    /**
+     * La déconnexion
+     */
+    private void actionLogout(HttpServletRequest request,
+            HttpServletResponse response,
+            TacheDAO tDAO) throws DAOException, ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        session.invalidate();
+        this.actionAfficher(request, response, tDAO);
+    }
+}

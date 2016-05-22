@@ -9,10 +9,10 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.Geometry;
-import com.google.maps.model.LatLng; 
+import com.google.maps.model.LatLng;
 import com.mycompany.twinoserver.dao.DAOException;
 import com.mycompany.twinoserver.dao.EvaluerDAO;
-import com.mycompany.twinoserver2.dao.TacheDAO;
+import com.mycompany.twinoserver.dao.TacheDAO;
 import java.io.*;
 import javax.annotation.Resource;
 import javax.servlet.*;
@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 
 public class ControleurTache extends HttpServlet {
 
-    @Resource(name = "jdbc/crowdsourcing_equipe2")
+    @Resource(name = "jdbc/TwinoServer")
 
     private DataSource ds;
 
@@ -176,7 +176,7 @@ public class ControleurTache extends HttpServlet {
         String userName = (String) session.getAttribute("utilisateur");
         request.setAttribute("competences", tDAO.getCompetences());
         getServletContext().getRequestDispatcher(
-                "/WEB-INF/Accueil_1.jsp").forward(request, response);
+                "/WEB-INF/index.html").forward(request, response);
 
     }
 
@@ -594,3 +594,9 @@ public class ControleurTache extends HttpServlet {
         GeocodingResult[] results;
         String adresse = null;
         results = GeocodingApi.newRequest(context).latlng(new LatLng(latitude, longitude)).await(); //.latlng(new LatLng(latitude, longitude)).await();
+        System.out.println(results[0].geometry);
+        adresse = results[0].formattedAddress;
+        return adresse;
+    }
+
+}

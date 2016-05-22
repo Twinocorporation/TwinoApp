@@ -34,7 +34,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
 
             //Ajout d'un utilisateur dans la table utilisateur
             PreparedStatement st = conn.prepareStatement(
-            "insert into utilisateur(adresseMail,mdp,sexe,nom,prenom,dateNaissance,latitudeU,longitudeU) values(?,?,?,?,?,TO_DATE(?,'YYYY-MM-DD'),?,?)”);
+            "insert into utilisateur(adresseMail,mdp,sexe,nom,prenom,dateNaissance,latitudeU,longitudeU) values(?,?,?,?,?,TO_DATE(?,'YYYY-MM-DD'),?,?)");
  st.setString(1, adresseMail);
             st.setString(2, mdp);
             st.setInt(3, sexe);

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.mycompany.twinoserver.dao;
-import issc_equipe2.modele.Evaluation;
+import com.mycompany.twinoserver.modele.Evaluation;
 import java.awt.PageAttributes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,7 +45,7 @@ public class EvaluerDAO extends AbstractDataBaseDAO {
 	}
 
 	public LinkedList<Evaluation> getListeEval(String adresseMailUtil) throws DAOException {
-    	LinkedList<Evaluation> result = new LinkedList<Evaluation>();
+    	LinkedList<Evaluation> result = new LinkedList<>();
     	ResultSet rs = null;
     	String requeteSQL = "";
     	Connection conn = null;
