@@ -26,7 +26,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
     /**
      * Ajoute un profil dans la base utilisateur (uniquement).
      */
-    public void ajouterUtilisateur(String adresseMail, String mdp, String nom, String prenom, int sexe, String dateNaissance, float latitudeU, float longitudeU, String[] competences) throws DAOException {
+    public void ajouterUtilisateur(String adresseMail, String mdp, String nom, String prenom, int sexe, String dateNaissance, double latitudeU, double longitudeU, String[] competences) throws DAOException {
         Connection conn = null;
         ResultSet rs = null;
         try {
@@ -41,8 +41,8 @@ public class ProfilDAO extends AbstractDataBaseDAO {
             st.setString(4, nom);
             st.setString(5, prenom);
             st.setString(6, dateNaissance);
-            st.setFloat(7, (float) latitudeU);
-            st.setFloat(8, (float) longitudeU);
+            st.setDouble(7,  latitudeU);
+            st.setDouble(8,  longitudeU);
             st.executeUpdate();
 
             //Ajout d'un utilisateur dans la table possede pour avoir acces à ses compétences
@@ -140,7 +140,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
      * nouveaux paramètres spécifiés Par contre non modification possible avec
      * cette methode de l'adresseMail
      */
-    public void modifierProfil(String adresseMail, String mdp, String nom, String prenom, String dateNaissance, int sexe, float latitudeU, float longitudeU, String[] competences) throws DAOException, IllegalArgumentException {
+    public void modifierProfil(String adresseMail, String mdp, String nom, String prenom, String dateNaissance, int sexe, double latitudeU, double longitudeU, String[] competences) throws DAOException, IllegalArgumentException {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
@@ -156,8 +156,8 @@ public class ProfilDAO extends AbstractDataBaseDAO {
             st.setString(2, nom);
             st.setString(3, prenom);
             st.setInt(4, sexe);
-            st.setFloat(5, latitudeU);
-            st.setFloat(6, longitudeU);
+            st.setDouble(5, latitudeU);
+            st.setDouble(6, longitudeU);
             st.setString(7, adresseMail);
             st.executeUpdate();
 
