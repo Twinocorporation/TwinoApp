@@ -7,7 +7,9 @@ package com.mycompany.twinoserver.dao;
 
 import com.mycompany.twinoserver.dao.DAOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.sql.DataSource;
 
 /**
@@ -25,7 +27,8 @@ public abstract class AbstractDataBaseDAO {
     }
 
     protected Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
+   
+            return dataSource.getConnection();
     }
 
     /**

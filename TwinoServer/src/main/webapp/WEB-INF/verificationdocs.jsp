@@ -88,7 +88,7 @@
                 <div class="section-title">
                     <h5 class="wow bounceIn">我是老司机，我要提供服务(✿≖ ◡ ≖)✧</h5>
                     <h1 class="heading">资质验证</h1>
-              
+              <h5 class="wow bounceIn"> 我们需要您提供相关材料的扫描件或清晰照片以便验证您的资质</h5>
                     <hr>
                 </div>
             </div>
@@ -97,7 +97,7 @@
 
                 <form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.6s">
                     <div class="col-md-12 col-sm-18" style="height: 35px; border-bottom: 3px solid #eee; font-size: 25px; text-align: center">
-                        我们需要您提供相关材料的扫描件或清晰照片以便验证您的资质
+                        
                     </div> 
 
                     <div class="col-md-12 col-sm-18" style="height: 54px">
@@ -106,7 +106,7 @@
             
 				<!-- <li><a href="#home" class="smoothScroll">HOME</a></li> -->
                 
-			<a class="a-upload" >                       
+			<a class="a-upload col-md-12 col-sm-9" >                       
     <input type="file" id="file1"  multiple>点击这里上传个人证件照
 </a>
 
