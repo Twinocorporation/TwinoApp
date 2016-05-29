@@ -65,16 +65,20 @@ public class ControleurProfil extends HttpServlet {
                 actionAfficher(request, response, tDAO);
             } else if (action.equals("posteruneannonce")) {
                 actionPoster(request, response, profilDAO);
-            } else if (action_enchaine.equals("modif")) {
+            } else if (action.equals("connexionrecevoirservice")) {
+                actionRecevoirservice(request, response, tDAO);
+            }else if (action.equals("connexiondonnerservice")) {
+                actionDonnerservice(request, response, tDAO);
+            }else if (action.equals("justeregarder")) {
+                actionJusteregarder(request, response);
+            }else if (action_enchaine.equals("modif")) {
                 actionModifierProfil(request, response, profilDAO);
             } else if (action.equals("modifierProfil")
                     || action_enchaine.equals("modifierProfil")) {
                 actionModifier(request, response, profilDAO);
-            } else if (action.equals("inscription")) {
-                actionInscription(request, response, profilDAO);
-            } else if (action.equals("connexion")) {
-                actionConnexion(request, response, tDAO);
-            } else if (action.equals("creerUtilisateur")
+            } else if (action.equals("inscriptionrecevoirservice")) {
+                actionInscriptionrecevoirservice(request, response, profilDAO);
+            }else if (action.equals("creerUtilisateur")
                     || action_enchaine.equals("creerUtilisateur")) {
                 actionCreerUtilisateur(request, response, profilDAO);
             } else if (action.equals("menuProfil")
@@ -119,21 +123,25 @@ public class ControleurProfil extends HttpServlet {
         ProfilDAO profilDAO = new ProfilDAO(ds);
         EvaluerDAO eDAO = new EvaluerDAO(ds);
 
-        try {
+ try {
             if (action == null) {
                 actionAfficher(request, response, tDAO);
             } else if (action.equals("posteruneannonce")) {
                 actionPoster(request, response, profilDAO);
-            } else if (action_enchaine.equals("modif")) {
+            } else if (action.equals("connexionrecevoirservice")) {
+                actionRecevoirservice(request, response, tDAO);
+            }else if (action.equals("connexiondonnerservice")) {
+                actionDonnerservice(request, response, tDAO);
+            }else if (action.equals("justeregarder")) {
+                actionJusteregarder(request, response);
+            }else if (action_enchaine.equals("modif")) {
                 actionModifierProfil(request, response, profilDAO);
             } else if (action.equals("modifierProfil")
                     || action_enchaine.equals("modifierProfil")) {
                 actionModifier(request, response, profilDAO);
-            } else if (action.equals("inscription")) {
-                actionInscription(request, response, profilDAO);
-            } else if (action.equals("connexion")) {
-                actionConnexion(request, response, tDAO);
-            } else if (action.equals("creerUtilisateur")
+            } else if (action.equals("inscriptionrecevoirservice")) {
+                actionInscriptionrecevoirservice(request, response, profilDAO);
+            }else if (action.equals("creerUtilisateur")
                     || action_enchaine.equals("creerUtilisateur")) {
                 actionCreerUtilisateur(request, response, profilDAO);
             } else if (action.equals("menuProfil")
@@ -272,26 +280,16 @@ public class ControleurProfil extends HttpServlet {
     /**
      * Créer son compte
      */
-    private void actionInscription(HttpServletRequest request,
+    private void actionInscriptionrecevoirservice(HttpServletRequest request,
             HttpServletResponse response,
             ProfilDAO profilDAO)
             throws IOException, ServletException, DAOException {
         //on envoie les compétences possibles
         request.setAttribute("competences", profilDAO.getCompetences());
         getServletContext().getRequestDispatcher(
-                "/WEB-INF/inscription_1.jsp").forward(request, response);
+                "/WEB-INF/newjsp.jsp").forward(request, response);
     }
 
-    /**
-     * Se connecter
-     */
-    private void actionConnexion(HttpServletRequest request,
-            HttpServletResponse response,
-            TacheDAO tDAO)
-            throws IOException, ServletException, DAOException {
-        getServletContext().getRequestDispatcher(
-                "/WEB-INF/connexion_1.jsp").forward(request, response);
-    }
 
     /**
      * Créer un utilisateur
@@ -430,4 +428,39 @@ public class ControleurProfil extends HttpServlet {
         session.invalidate();
         this.actionAfficher(request, response, tDAO);
     }
+    
+        /**
+     * La déconnexion
+     */
+    
+    
+        /**
+     * Se connecter
+     */
+
+
+    private void actionRecevoirservice(HttpServletRequest request,
+            HttpServletResponse response ,
+            TacheDAO tDAO) throws DAOException, ServletException, IOException {
+
+        getServletContext().getRequestDispatcher("/WEB-INF/recevoirservice.jsp").forward(request, response);
+      
+    }
+    
+        private void actionDonnerservice(HttpServletRequest request,
+            HttpServletResponse response ,
+            TacheDAO tDAO) throws DAOException, ServletException, IOException {
+
+        getServletContext().getRequestDispatcher("/WEB-INF/donnerservice.jsp").forward(request, response);
+      
+    }
+        
+        
+    private void actionJusteregarder(HttpServletRequest request,
+            HttpServletResponse response) throws DAOException, ServletException, IOException {
+
+        getServletContext().getRequestDispatcher("/WEB-INF/recevoirservice.jsp").forward(request, response);
+      
+    }
+    
 }

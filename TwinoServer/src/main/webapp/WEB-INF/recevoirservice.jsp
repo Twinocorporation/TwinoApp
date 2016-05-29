@@ -70,6 +70,14 @@ and open the template in the editor.
 
 
 	</div>
+                
+                <%
+                        	String var= (String) request.getAttribute("user");        	 
+                        	if (var == "null") {
+                    	%>
+                    	<p> Mauvais identifiant ou mot de passe ! </p>
+                    	<% } %>
+
 </section>
 </header>
         
@@ -92,21 +100,27 @@ and open the template in the editor.
 			<!-- Contact form section
 			================================================== -->
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
-				<form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.6s">
-					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="text" class="form-control" placeholder="邮箱" name="name">
-					</div>
-					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="email" class="form-control" placeholder="密码" name="email">
-					</div>
-					
-					
-					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="submit" class="form-control" value="登录">
-					</div>
+				<form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.6s" action="controleurProfil">
+                                    <input type="hidden" name="action" value="connectera" />
+                                    
                                     <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="submit" class="form-control" value="注册">
+						<label> Email    </label> &nbsp;&nbsp;<input class="searchinput" type="text" value="Email" onclick="this.value='';" name="email" id="s" /> <br/><br/>
+
 					</div>
+					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
+						<label> Mot de Passe   </label> &nbsp;&nbsp;<input class="searchinput" type="password" value="Mot de passe" onclick="this.value='';" name="mdp" id="s" /><br/><br/>
+
+					</div>
+					
+					
+					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
+						<input type="submit" value="Connexion" /> <br/><br/>
+					</div>
+                                  
+                                    
+						<a href="controleurProfil?action=inscriptionrecevoirservice"> <label> Si vous êtes pas encore inscrit, inscrivez vous!  </label></a>
+
+					
 				</form>
 			</div>
 
