@@ -13,12 +13,13 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>我想提供服务</title>
+        <title>&#25105;&#24819;&#25552;&#20379;&#26381;&#21153;</title>
         
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="">
 	<meta name="description" content="">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 	<!-- Bootstrap CSS
    ================================================== -->
@@ -91,8 +92,8 @@ and open the template in the editor.
 			================================================== -->
 			<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 				<div class="section-title">
-					<h5 class="wow bounceIn">我刚来法国，我想找服务(ﾟДﾟ≡ﾟдﾟ)!?</h5>
-					<h1 class="heading">登录</h1>
+					<h5 class="wow bounceIn">&#25105;&#21018;&#26469;&#27861;&#22269;&#65292;&#25105;&#24819;&#25214;&#26381;&#21153;!?</h5>
+					<h1 class="heading">&#30331;&#24405;</h1>
 					<hr>
 				</div>
 			</div>
@@ -100,7 +101,7 @@ and open the template in the editor.
 			<!-- Contact form section
 			================================================== -->
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
-				<form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.6s" action="controleurProfil">
+				<form method="post" action="controleurProfil?action=connectera">
                                     <input type="hidden" name="action" value="connectera" />
                                     
                                     <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">

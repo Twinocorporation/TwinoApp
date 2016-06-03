@@ -1,8 +1,8 @@
 
-package com.mycompany.twinoserver.dao;
+package twinoserver.dao;
 
-import com.mycompany.twinoserver.modele.Message;
-import com.mycompany.twinoserver.modele.Tache;
+import twinoserver.modele.Message;
+import twinoserver.modele.Tache;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,9 +30,10 @@ public class MessageDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
+        Statement st=null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "select * from messagerie where adresseMailDest='" + adresseMail + "' order by dateHeureMess desc";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
@@ -42,7 +43,7 @@ public class MessageDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getListeMessages)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
     }
@@ -55,9 +56,10 @@ public class MessageDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
+        Statement st=null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "select * from messagerie where numMessage=" + numMessage;
             rs = st.executeQuery(requeteSQL);
             rs.next();
@@ -66,7 +68,7 @@ public class MessageDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getMessage)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
     }
@@ -76,9 +78,11 @@ public class MessageDAO extends AbstractDataBaseDAO {
      */
     public void ajouterMessage(String titre, String message, String adresseMailExp, String adresseMailDest, int estLu) throws DAOException {
         Connection conn = null;
+        PreparedStatement st=null;
+        ResultSet rs = null;
         try {
             conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(
+             st = conn.prepareStatement(
                     "insert into messagerie(dateHeureMess,titre,message,estLu,adresseMailExp,adresseMailDest) values(Current_timestamp,?,?,?,?,?)");
             st.setString(1, titre);
             st.setString(2, message);
@@ -89,7 +93,7 @@ public class MessageDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (ajouterMessage)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 
@@ -99,10 +103,12 @@ public class MessageDAO extends AbstractDataBaseDAO {
      */
     public void modifierMessage(int numMessage) throws DAOException {
         Connection conn = null;
+        ResultSet rs = null;
+        PreparedStatement st=null;
         try {
             conn = getConnection();
 
-            PreparedStatement st = conn.prepareStatement(
+             st = conn.prepareStatement(
                     "UPDATE messagerie SET estLu=? WHERE numMessage = ? ");
             st.setInt(1, 1);
             st.setInt(2, numMessage);
@@ -111,7 +117,7 @@ public class MessageDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (modifierMessage)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 
@@ -121,15 +127,18 @@ public class MessageDAO extends AbstractDataBaseDAO {
     public void supprimerMessage(int numMessage) throws DAOException {
         String requeteSQL = "";
         Connection conn = null;
+       Statement st=null;
+        ResultSet rs = null;
+       
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "DELETE FROM messagerie WHERE numMessage=" + numMessage;
             st.executeQuery(requeteSQL);
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (supprimerMessage)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 

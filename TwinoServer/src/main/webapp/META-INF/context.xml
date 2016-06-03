@@ -4,7 +4,7 @@
     	auth="Container"
     	type="javax.sql.DataSource"
     	driverClassName="org.apache.derby.jdbc.ClientDriver"
-    	url="jdbc:derby://localhost:1527/Twino"
+    	url="jdbc:derby://localhost:1527/Twino;create=true"
     	maxActive="10"
     	maxIdle="60"
     	maxWait="10000"
@@ -13,3 +13,4 @@
     	password="twino"
 	/>
 </Context>
+

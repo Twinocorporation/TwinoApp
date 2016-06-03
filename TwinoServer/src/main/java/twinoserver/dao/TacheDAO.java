@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.twinoserver.dao;
+package twinoserver.dao;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
-import com.mycompany.twinoserver.modele.Tache;
-import com.mycompany.twinoserver.modele.TacheAtom;
+import twinoserver.modele.Tache;
+import twinoserver.modele.TacheAtom;
 import java.util.LinkedList;
 
 /**
@@ -34,9 +34,10 @@ public class TacheDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
+         Statement st =null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+           st = conn.createStatement();
             requeteSQL = "select * from tache where adresseMailCom='"
                     + adresseMail + "'";
             rs = st.executeQuery(requeteSQL);
@@ -49,7 +50,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getListeTache)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
     }
@@ -64,9 +65,10 @@ public class TacheDAO extends AbstractDataBaseDAO {
         String requeteSQL = "";
         Connection conn = null;
         TacheAtom ta;
+        Statement st =null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+           st = conn.createStatement();
             requeteSQL = "select * from tacheAtomique where numTache='" + numTache + "'";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
@@ -83,7 +85,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
             throw new DAOException("Erreur BD (getListeTacheAtom -- numTache)"
                     + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
 
@@ -99,9 +101,10 @@ public class TacheDAO extends AbstractDataBaseDAO {
         String requeteSQL = "";
         Connection conn = null;
         TacheAtom ta;
+        Statement st =null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "select * from tacheAtomique where adresseMailExec='"
                     + adresseMailExec + "'";
             rs = st.executeQuery(requeteSQL);
@@ -120,7 +123,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
             throw new DAOException("Erreur BD (getListeTacheAtom -- adresseMailExec)"
                     + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
 
@@ -135,9 +138,10 @@ public class TacheDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
+        Statement st =null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "select * from tacheAtomique where numTache=" + numTache
                     + " and numTacheAtomique=" + numTacheAtom;
             rs = st.executeQuery(requeteSQL);
@@ -152,7 +156,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getTacheAtom)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
 
@@ -166,9 +170,10 @@ public class TacheDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
+        Statement st =null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+             st = conn.createStatement();
             requeteSQL = "select distinct adresseMailCom from tache where numTache=" + numTache;
             rs = st.executeQuery(requeteSQL);
             rs.next();
@@ -176,7 +181,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getAdresseDest)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
 
@@ -191,9 +196,10 @@ public class TacheDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         int numTache = 0;
+        PreparedStatement st =null;
         try {
             conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(
+             st = conn.prepareStatement(
                     "insert into tache(description,adresseMailCom) values(?,?)");
             st.setString(1, description);
             st.setString(2, adresseMailCom);
@@ -208,7 +214,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (ajouterTache)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
             return numTache;
         }
     }
@@ -219,10 +225,12 @@ public class TacheDAO extends AbstractDataBaseDAO {
     public void addCompetences(LinkedList<String> competences, int numTache,
             int numTacheAtomique) throws DAOException {
         Connection conn = null;
+        PreparedStatement st =null;
+        ResultSet rs = null;
         try {
             conn = getConnection();
             for (String compet : competences) {
-                PreparedStatement st = conn.prepareStatement(
+                 st = conn.prepareStatement(
                         "insert into requiert(numTache,numTacheAtomique,"
                         + "typeCompetence) values(?,?,?)");
                 st.setInt(1, numTache);
@@ -233,7 +241,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (addCompetences)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 
@@ -248,9 +256,10 @@ public class TacheDAO extends AbstractDataBaseDAO {
         String requeteSQL = "";
         ResultSet rs = null;
         int numTacheAtomique = 0;
+        PreparedStatement st = null;
         try {
             conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(
+             st = conn.prepareStatement(
                     "insert into tacheAtomique(numTache,latitudeT,longitudeT,"
                     + "dateTot,dateTard,titre,description,remuneration,"
                     + "estPaye,estEffectue,adresseMailExec) "
@@ -277,7 +286,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (ajouterTacheAtomique)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return numTacheAtomique;
     }
@@ -291,9 +300,10 @@ public class TacheDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
+         Statement st =null;       
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "SELECT * FROM requiert where numTache=" + numTache
                     + " and numTAcheAtomique=" + numTacheAtomique;
             rs = st.executeQuery(requeteSQL);
@@ -304,7 +314,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
             throw new DAOException("Erreur BD (getCompetences sans adresseMail)"
                     + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
     }
@@ -318,19 +328,23 @@ public class TacheDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
+        Statement st = null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "SELECT * FROM competence";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
                 result.add(rs.getString("typeCompetence"));
             }
+            
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getCompetences sans adresseMail)"
                     + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            
+            closeConnection(conn,rs,st);
+           
         }
         return result;
     }
@@ -347,11 +361,12 @@ public class TacheDAO extends AbstractDataBaseDAO {
         Connection conn = null;
         LinkedList<String> result = new LinkedList<String>();
         LinkedList<String> tableCompetence = new LinkedList<String>();
+        PreparedStatement st=null;
         try {
             conn = getConnection();
 
             //On met à jour le profil de la tache
-            PreparedStatement st = conn.prepareStatement(
+             st = conn.prepareStatement(
                     "UPDATE tacheAtomique SET titre = ?, description = ?, "
                     + "dateTot = TO_DATE('" + dateTot + "','YYYY-MM-DD'), "
                     + "dateTard = TO_DATE('" + dateTard + "','YYYY-MM-DD'), "
@@ -387,7 +402,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (modifierTache)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 
@@ -403,9 +418,10 @@ public class TacheDAO extends AbstractDataBaseDAO {
         LinkedList<TacheAtom> result = new LinkedList<TacheAtom>();
         TacheAtom ta;
         int i = 1;
+        Statement st =null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+             st = conn.createStatement();
             requeteSQL = "select distinct ta.numTache, ta.numTacheAtomique, "
                     + "titre, ta.description, dateTot, dateTard, latitudeT, "
                     + "longitudeT, remuneration, adresseMailExec, EstPaye, "
@@ -471,7 +487,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (search)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
     }
@@ -483,9 +499,10 @@ public class TacheDAO extends AbstractDataBaseDAO {
         String requeteSQL = "";
         Connection conn = null;
         ResultSet rs = null;
+        Statement st =null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+             st = conn.createStatement();
             requeteSQL = "DELETE FROM requiert WHERE numTache=" + numTache
                     + " and numTacheAtomique= " + numTacheAtomique;
             st.executeQuery(requeteSQL);
@@ -502,7 +519,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (supprimerTache)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 
@@ -511,9 +528,11 @@ public class TacheDAO extends AbstractDataBaseDAO {
      */
     public void execute(int numTache, int numTacheAtomique, String adresseMailExec) throws DAOException {
         Connection conn = null;
+         PreparedStatement st=null;
+         ResultSet rs = null;
         try {
             conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(
+            st = conn.prepareStatement(
                     "UPDATE tacheAtomique SET adresseMailExec=? "
                     + "WHERE numTache = ? and numTacheAtomique = ?");
             st.setString(1, adresseMailExec);
@@ -524,7 +543,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (execute)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 
@@ -534,9 +553,11 @@ public class TacheDAO extends AbstractDataBaseDAO {
      */
     public void annulerTache(int numTache, int numTacheAtomique) throws DAOException {
         Connection conn = null;
+        ResultSet rs = null;
+        PreparedStatement st=null;
         try {
             conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(
+            st = conn.prepareStatement(
                     "UPDATE tacheAtomique SET adresseMailExec=? "
                     + "WHERE numTache = ? and numTacheAtomique = ?");
             st.setString(1, null);
@@ -546,15 +567,17 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (annulerTache)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 
     public void effectue(int numTache, int numTacheAtomique) throws DAOException {
         Connection conn = null;
+        PreparedStatement st=null;
+        ResultSet rs = null;
         try {
             conn = getConnection();
-            PreparedStatement st = conn.prepareStatement(
+            st = conn.prepareStatement(
                     "UPDATE tacheAtomique SET estEffectue=? "
                     + "WHERE numTache = ? and numTacheAtomique = ?");
             st.setInt(1, 1);
@@ -572,7 +595,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (execute)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 }

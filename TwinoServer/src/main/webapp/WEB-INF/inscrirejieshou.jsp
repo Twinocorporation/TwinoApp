@@ -7,12 +7,13 @@
 
     <!-- Template site title
 ================================================== -->
-    <title>Twnio-注册</title>
+    <title>Twnio-&#27880;&#20876;</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="">
     <meta name="description" content="">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!--
     
     
@@ -81,8 +82,8 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
                 <div class="section-title">
-                    <h5 class="wow bounceIn">我刚来法国，我想找服务(ﾟДﾟ≡ﾟдﾟ)!?</h5>
-                    <h1 class="heading">注册</h1>
+                    <h5 class="wow bounceIn">&#25105;&#21018;&#26469;&#27861;&#22269;&#65292;&#25105;&#24819;&#25214;&#26381;&#21153;!?</h5>
+                    <h1 class="heading">&#27880;&#20876;</h1>
                     <hr>
                 </div>
             </div>
@@ -91,53 +92,53 @@
 
                 <form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.6s">
                     <div class="col-md-12 col-sm-18" style="height: 35px; border-bottom: 3px solid #eee; font-size: 25px; text-align: center">
-                        以下为必填信息
+                        &#20197;&#19979;&#20026;&#24517;&#22635;&#20449;&#24687;
                     </div> 
                     <div class="col-md-2 col-sm-3" style="height:35px">
 
 
                         <input type="radio" id="radio01" name="radio" >
-                        <label for="radio01"><span></span>男生</label>
+                        <label for="radio01"><span></span>&#30007;&#29983;</label>
                     </div>
 
                     <div class="col-md-2 col-sm-3" style="height:35px">
                         <input type="radio" id="radio02" name="radio" >
-                        <label for="radio02"><span></span>女生</label>
+                        <label for="radio02"><span></span>&#22899;&#29983;</label>
                     </div>
                     <div class="col-md-8 col-sm-0" style="height:35px">
 
                     </div>
 
                     <div class="col-md-4 col-sm-18">
-                        <input type="text" class="form-control" placeholder="姓氏" name="server_nom">
+                        <input type="text" class="form-control" placeholder="&#22995;&#27663;" name="server_nom">
                     </div>
                     
                     <div class="col-md-4 col-sm-18">
-                        <input type="text" class="form-control" placeholder="名字" name="server_prenom">
+                        <input type="text" class="form-control" placeholder="&#21517;&#23383;" name="server_prenom">
                     </div>
                     <div class="col-md-4 col-sm-18">
-                        <input type="text" class="form-control" placeholder="生日:yyyy-mm-dd" name="server_birthday">
+                        <input type="text" class="form-control" placeholder="&#29983;&#26085;:yyyy-mm-dd" name="server_birthday">
                     </div>
 
                     <div class="col-md-12 col-sm-18">
-                        <input type="text" class="form-control" placeholder="邮箱" name="server_mail">
+                        <input type="text" class="form-control" placeholder="&#37038;&#31665;" name="server_mail">
                     </div>
                     <div class="col-md-6 col-sm-18">
-                        <input type="password" class="form-control" placeholder="密码" name="server_password">
+                        <input type="password" class="form-control" placeholder="&#23494;&#30721;" name="server_password">
                     </div>                       
                     <div class="col-md-6 col-sm-18" >
-                        <input type="password" class="form-control" placeholder="确认密码" name="server_password_2">
+                        <input type="password" class="form-control" placeholder="&#30830;&#35748;&#23494;&#30721;" name="server_password_2">
                     </div> 
 
                     
 
                     <div class="col-md-12 col-sm-18" style="height: 35px; border-bottom: 3px solid #eee; font-size: 25px; text-align: center">
-                        以下为选填信息
+                        &#20197;&#19979;&#20026;&#36873;&#22635;&#20449;&#24687;
                     </div> 
 
                     <div class="col-md-12 col-sm-18" style="height: 54px">
 <a class="a-upload">
-    <input type="file" id="file"  multiple>点击这里上传照片
+    <input type="file" id="file"  multiple>&#28857;&#20987;&#36825;&#37324;&#19978;&#20256;&#29031;&#29255;
 </a>
 </div>
 
@@ -175,16 +176,16 @@
                         if (allowedTypes.indexOf(imgType) != -1) {
                             createThumbnail(files[i]);
                             document.getElementById("cc").style.backgroundColor="#BCF5A9";
-                            document.getElementById("cc").innerHTML=" <input type='file' id='file'  multiple>点击这里更换照片";
+                            document.getElementById("cc").innerHTML=" <input type='file' id='file'  multiple>&#28857;&#20987;&#36825;&#37324;&#26356;&#25442;&#29031;&#29255;";
                         }else{
-                            alert("请确认您选择的图片格式为 png、jpg、jpeg 或 gif。");
+                            alert("&#35831;&#30830;&#35748;&#24744;&#36873;&#25321;&#30340;&#22270;&#29255;&#26684;&#24335;&#20026; png、jpg、jpeg &#25110; gif。");
                         }
                     }
                 });
             })();
         </script>
                     <div class="col-md-12 col-sm-18">
-                        <input type="text" class="form-control" placeholder="电话号码" name="server_phone">
+                        <input type="text" class="form-control" placeholder="&#30005;&#35805;&#21495;&#30721;" name="server_phone">
                     </div>
 
                     <div class="col-md-12 col-sm-18" style="height: 54px; border-bottom: 3px solid #eee">
@@ -196,10 +197,10 @@
                     <div class="col-md-12 col-sm-18" style="height:54px">
 
                         <input type="checkbox" id="checkbox4"  name="client_right" />
-                        <label for="checkbox4"><span></span>我已阅读并同意相关服务条款和隐私政策</label>
+                        <label for="checkbox4"><span></span>&#25105;&#24050;&#38405;&#35835;&#24182;&#21516;&#24847;&#30456;&#20851;&#26381;&#21153;&#26465;&#27454;&#21644;&#38544;&#31169;&#25919;&#31574;</label>
                     </div>
                     <div class="blackbutton_home" style="margin-top: 15px; margin-right: -32px;">
-                        <a href="recevoirservice.jsp" ><button class="btn btn-default">提交注册</button></a>
+                        <a href="recevoirservice.jsp" ><button class="btn btn-default">&#25552;&#20132;&#27880;&#20876;</button></a>
                     </div>
 
 
@@ -209,7 +210,7 @@
 
         </div>
 </section>
-                                    <input id="file" value="设置头像" type="file" multiple />
+                                    <input id="file" value="&#35774;&#32622;&#22836;&#20687;" type="file" multiple />
         <div id="prev"></div>
 
 <script src="js/jquery.js"></script>
