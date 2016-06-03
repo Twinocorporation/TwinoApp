@@ -12,3 +12,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\Jingyuan\OneDrive\Twino\TwinoApp\DataBaseTwino
 数据库类加载程序已启动 - derby.database.classpath=''
+----------------------------------------------------------------
+Sun May 29 17:20:58 CEST 2016：正在关闭 Derby 引擎
+----------------------------------------------------------------
+Sun May 29 17:20:58 CEST 2016:
+正在使用类加载程序 sun.misc.Launcher$AppClassLoader@1d44bcfa 关闭数据库目录 C:\Users\Jingyuan\OneDrive\Twino\TwinoApp\DataBaseTwino\Twino 上的实例 a816c00e-0154-fc65-2d81-ffffbd02dd55
+----------------------------------------------------------------

@@ -285,7 +285,7 @@ public class ControleurProfil extends HttpServlet {
             ProfilDAO profilDAO)
             throws IOException, ServletException, DAOException {
         //on envoie les compétences possibles
-        request.setAttribute("competences", profilDAO.getCompetences());
+       // request.setAttribute("competences", profilDAO.getCompetences());
         getServletContext().getRequestDispatcher(
                 "/WEB-INF/newjsp.jsp").forward(request, response);
     }
