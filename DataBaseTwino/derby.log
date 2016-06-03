@@ -1,1 +1,20 @@
-Thu May 26 20:58:10 CEST 2016 : Apache Derby 网络服务器 - 10.11.1.2 - (1629631) 已启动并准备接受端口 1527 上的连接
+Sun May 29 14:02:50 CEST 2016 : Apache Derby 网络服务器 - 10.11.1.2 - (1629631) 已启动并准备接受端口 1527 上的连接
+----------------------------------------------------------------
+Sun May 29 14:02:50 CEST 2016:
+正在使用类加载程序 sun.misc.Launcher$AppClassLoader@1d44bcfa 引导数据库
+目录 C:\Users\Jingyuan\OneDrive\Twino\TwinoApp\DataBaseTwino\Twino 中的 Derby 版本 The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631) 实例 a816c00e-0154-fc65-2d81-ffffbd02dd55
+已从 file:/D:/Program%20Files/Java/jdk1.8.0_91/db/lib/derby.jar 加载
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_91-b14
+user.dir=D:\Program Files\Java\jdk1.8.0_91\db
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\Jingyuan\OneDrive\Twino\TwinoApp\DataBaseTwino
+数据库类加载程序已启动 - derby.database.classpath=''
+----------------------------------------------------------------
+Sun May 29 17:20:58 CEST 2016：正在关闭 Derby 引擎
+----------------------------------------------------------------
+Sun May 29 17:20:58 CEST 2016:
+正在使用类加载程序 sun.misc.Launcher$AppClassLoader@1d44bcfa 关闭数据库目录 C:\Users\Jingyuan\OneDrive\Twino\TwinoApp\DataBaseTwino\Twino 上的实例 a816c00e-0154-fc65-2d81-ffffbd02dd55
+----------------------------------------------------------------

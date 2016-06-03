@@ -291,7 +291,11 @@ public class ControleurProfil extends HttpServlet {
             throws IOException, ServletException, DAOException {
         request.setCharacterEncoding("UTF-8");
         //on envoie les compétences possibles
+<<<<<<< HEAD:TwinoServer/src/main/java/com/mycompany/twinoserver/ControleurProfil.java
+       // request.setAttribute("competences", profilDAO.getCompetences());
+=======
       request.setAttribute("competences", profilDAO.getCompetences());
+>>>>>>> master:TwinoServer/src/main/java/twinoserver/controleur/ControleurProfil.java
         getServletContext().getRequestDispatcher(
                 "/WEB-INF/inscrirejieshou.jsp").forward(request, response);
     }
