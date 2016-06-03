@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.twinoserver.dao;
+package twinoserver.dao;
 
-import com.mycompany.twinoserver.modele.Profil;
-import com.mycompany.twinoserver.modele.Tache;
+import twinoserver.modele.Profil;
+import twinoserver.modele.Tache;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.sql.DataSource;
-
+import java.sql.Connection;
 public class ProfilDAO extends AbstractDataBaseDAO {
 
     public ProfilDAO(DataSource ds) {
@@ -29,11 +29,12 @@ public class ProfilDAO extends AbstractDataBaseDAO {
     public void ajouterUtilisateur(String adresseMail, String mdp, String nom, String prenom, int sexe, String dateNaissance, double latitudeU, double longitudeU, String[] competences) throws DAOException {
         Connection conn = null;
         ResultSet rs = null;
+        PreparedStatement st =null;
         try {
             conn = getConnection();
 
             //Ajout d'un utilisateur dans la table utilisateur
-            PreparedStatement st = conn.prepareStatement(
+           st = conn.prepareStatement(
             "insert into utilisateur(adresseMail,mdp,sexe,nom,prenom,dateNaissance,latitudeU,longitudeU) values(?,?,?,?,?,TO_DATE(?,'YYYY-MM-DD'),?,?)");
  st.setString(1, adresseMail);
             st.setString(2, mdp);
@@ -57,7 +58,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (ajouterUtilisateur)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 
@@ -70,10 +71,11 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         String requeteSQL = "";
         Connection conn = null;
         LinkedList<String> competences = new LinkedList();
+        Statement st = null;
         //competences=this.getCompetences(adresseMail);
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "SELECT * FROM utilisateur WHERE adresseMail='" + adresseMail + "'";
             rs = st.executeQuery(requeteSQL);
             rs.next();
@@ -81,7 +83,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getProfil)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
     }
@@ -94,9 +96,10 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
+        Statement st=null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "SELECT typeCompetence FROM possede WHERE adresseMailExec='" + adresseMail + "'";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
@@ -105,7 +108,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getCompetences avec adresseMail)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
     }
@@ -119,9 +122,10 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
+        Statement st = null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "SELECT * FROM competence";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
@@ -130,7 +134,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getCompetences sans adresseMail)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn, rs, st);
         }
         return result;
     }
@@ -146,11 +150,12 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         Connection conn = null;
         LinkedList<String> result = new LinkedList<String>();
         LinkedList<String> tableCompetence = new LinkedList<String>();
+        PreparedStatement st =null;
         try {
             conn = getConnection();
 
             //On met à jour le profil de l'utilisateur
-            PreparedStatement st = conn.prepareStatement(
+            st = conn.prepareStatement(
                     "UPDATE utilisateur SET mdp = ?, nom = ?, prenom = ?, sexe = ?, dateNaissance = TO_DATE('" + dateNaissance + "','YYYY-MM-DD'),latitudeU = ?, longitudeU = ? WHERE adresseMail = ?");
             st.setString(1, mdp);
             st.setString(2, nom);
@@ -176,7 +181,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (modifierProfil)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 
@@ -187,16 +192,18 @@ public class ProfilDAO extends AbstractDataBaseDAO {
     public void supprimerProfil(String adresseMail) throws DAOException {
         String requeteSQL = "";
         Connection conn = null;
+        ResultSet rs = null;
+        Statement  st=null;
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "DELETE FROM omaraz.utilisateur WHERE adresseMail=" + adresseMail;
             requeteSQL = "DELETE FROM omaraz.possede WHERE adresseMail=" + adresseMail;
             st.executeQuery(requeteSQL);
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (supprimer)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
     }
 
@@ -205,10 +212,11 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
+        Statement st=null;
 
         try {
             conn = getConnection();
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             requeteSQL = "SELECT * FROM utilisateur WHERE adresseMail='" + login + "' AND mdp='" + mdp + "'";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
@@ -217,7 +225,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getProfil)" + e.getMessage(), e);
         } finally {
-            closeConnection(conn);
+            closeConnection(conn,rs,st);
         }
         return result;
     }

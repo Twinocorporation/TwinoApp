@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 <glassfish-web-app>
 <parameter-encoding default-charset="UTF-8"/>
 </glassfish-web-app>
 
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource-ref>
+      <description>DB Connection</description>
+      <res-ref-name>jdbc/TwinoServer</res-ref-name>
+      <res-type>javax.sql.DataSource</res-type>
+      <res-auth>Container</res-auth>
+</resource-ref>
+>>>>>>> master

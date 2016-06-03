@@ -8,8 +8,9 @@
 <!DOCTYPE html>
 <html>
         <head>
-        <title>我想提供服务</title>
-        
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>&#25105;&#24819;&#25552;&#20379;&#26381;&#21153;</title>
+       
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="">
@@ -45,11 +46,13 @@
    	<!-- Main CSS
    	================================================== -->
 	<link rel="stylesheet" href="css/style.css">
-
+        
+<link href='https://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
 
 </head>
  <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 <header>
+    
 <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
 	<div class="container">
 
@@ -59,7 +62,7 @@
 				<span class="icon icon-bar"></span>
 				<span class="icon icon-bar"></span>
 			</button>
-                    <a href="index.html" class="smoothScroll navbar-brand" >Twino</a>
+                    <a href="controleurTache" class="smoothScroll navbar-brand" >Twino</a>
 		</div>
 
 
@@ -78,8 +81,8 @@
 			================================================== -->
 			<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 				<div class="section-title">
-					<h5 class="wow bounceIn">我是老司机，我要提供服务(✿≖ ◡ ≖)✧</h5>
-					<h1 class="heading">登录</h1>
+					<h5 class="wow bounceIn">&#25105;&#26159;&#32769;&#21496;&#26426;&#65292;&#25105;&#35201;&#25552;&#20379;&#26381;&#21153;</h5>
+					<h1 class="heading">&#30331;&#24405;</h1>
 					<hr>
 				</div>
 			</div>
@@ -94,21 +97,27 @@
     }  
 </script>
                         <div class="col-md-offset-1 col-md-10 col-sm-12">
-				<form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.3s">
-					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="text" class="form-control" placeholder="邮箱" name="name">
-					</div>
-					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="email" class="form-control" placeholder="密码" name="email">
-					</div>
-					
-					
-					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="submit" class="form-control" value="登录">
-					</div>
+				<form action="controleurProfil?action=connectera" method="post" class="wow fadeInUp" data-wow-delay="0.3s">
+					  
                                     <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-                                        <input type="button" onclick="_inscrire()" class="form-control" value="注册" />
+						<label> Email    </label> &nbsp;&nbsp;<input class="searchinput" type="text" value="Email" onclick="this.value='';" name="email" id="s" /> <br/><br/>
+
 					</div>
+					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
+						<label> Mot de Passe   </label> &nbsp;&nbsp;<input class="searchinput" type="password" value="Mot de passe" onclick="this.value='';" name="mdp" id="s" /><br/><br/>
+
+					</div>
+					
+					
+					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
+						<input type="submit" value="Connexion" /> <br/><br/>
+					</div>
+                                  
+                                    
+						<a href="controleurProfil?action=inscriptiondonnerservice"> <label> Si vous êtes pas encore inscrit, inscrivez vous!  </label></a>
+
+					
+				</form>
 				</form>
 			</div>
 
@@ -151,16 +160,16 @@
 
 <!-- Javascript 
 ================================================== -->
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/smoothscroll.js"></script>
-<script src="js/nivo-lightbox.min.js"></script>
-<script src="js/jquery.easing-1.3.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.parallax.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/custom.js"></script>
 
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/nivo-lightbox.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing-1.3.js"></script>
+<script type="text/javascript" src="js/plugins.js"></script>
+<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="js/jquery.parallax.js"></script>
+<script type="text/javascript" src="js/wow.min.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/smoothscroll.js"></script>
 </body>
 </html>

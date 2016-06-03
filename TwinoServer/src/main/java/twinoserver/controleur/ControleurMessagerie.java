@@ -1,9 +1,9 @@
-package com.mycompany.twinoserver;
+package twinoserver.controleur;
 
-import com.mycompany.twinoserver.dao.DAOException;
-import com.mycompany.twinoserver.dao.MessageDAO;
-import com.mycompany.twinoserver.dao.ProfilDAO;
-import com.mycompany.twinoserver.dao.TacheDAO;
+import twinoserver.dao.DAOException;
+import twinoserver.dao.MessageDAO;
+import twinoserver.dao.ProfilDAO;
+import twinoserver.dao.TacheDAO;
 import java.io.*;
 import javax.annotation.Resource;
 import javax.servlet.*;
@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 public class ControleurMessagerie extends HttpServlet {
 
-    @Resource(name = "jdbc/crowdsourcing_equipe2")
+    @Resource(name = "jdbc/TwinoServer")
 
     private DataSource ds;
 
@@ -124,7 +124,7 @@ public class ControleurMessagerie extends HttpServlet {
     private void actionAfficher(HttpServletRequest request,
             HttpServletResponse response,
             TacheDAO tDAO) throws DAOException, ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String userName = (String) session.getAttribute("utilisateur");
         request.setAttribute("competences", tDAO.getCompetences());
@@ -140,7 +140,7 @@ public class ControleurMessagerie extends HttpServlet {
             HttpServletResponse response,
             MessageDAO mDAO)
             throws IOException, ServletException, DAOException {
-
+request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         request.setAttribute("messages", mDAO.getListeMessages(
                 (String) session.getAttribute("email")));
@@ -156,6 +156,7 @@ public class ControleurMessagerie extends HttpServlet {
             HttpServletResponse response,
             MessageDAO mDAO, TacheDAO tDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String numTache = request.getParameter("numTache");
         String numTacheAtomique = request.getParameter("numTacheAtomique");
@@ -175,6 +176,7 @@ public class ControleurMessagerie extends HttpServlet {
             HttpServletResponse response,
             MessageDAO mDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         //pour marquer le message comme lu (en fait ne modifie que la valeur estLu)
         mDAO.modifierMessage(Integer.parseInt(request.getParameter("numMessage")));
         request.setAttribute("messages", mDAO.getMessage(
@@ -190,6 +192,7 @@ public class ControleurMessagerie extends HttpServlet {
             HttpServletResponse response,
             MessageDAO mDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         mDAO.supprimerMessage(Integer.parseInt(request.getParameter("numMessage")));
         this.actionMessagerie(request, response, mDAO);
     }
@@ -201,6 +204,7 @@ public class ControleurMessagerie extends HttpServlet {
             HttpServletResponse response,
             MessageDAO mDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         mDAO.ajouterMessage(request.getParameter("titre"),
                 request.getParameter("message"),
                 request.getParameter("adresseMailExp"),
@@ -216,6 +220,7 @@ public class ControleurMessagerie extends HttpServlet {
             HttpServletResponse response,
             MessageDAO mDAO, TacheDAO tDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         String adresseMailDest = request.getParameter("adresseMailDest");
         String adresseMailExp = request.getParameter("adresseMailExp");
         if (request.getParameter("confirm").equals("Refuser")) {
@@ -257,6 +262,7 @@ public class ControleurMessagerie extends HttpServlet {
             HttpServletResponse response,
             MessageDAO mDAO, TacheDAO tDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         String adresseMailDest = request.getParameter("adresseMailDest");
         String adresseMailExp = request.getParameter("adresseMailExp");
         //Titre du message envoyé par le futur executant qui
@@ -290,6 +296,7 @@ public class ControleurMessagerie extends HttpServlet {
             HttpServletResponse response,
             MessageDAO mDAO, TacheDAO tDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         ProfilDAO pDAO = new ProfilDAO(ds);
         HttpSession session = request.getSession();
 

@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.twinoserver;
+package twinoserver.controleur;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.Geometry;
 import com.google.maps.model.LatLng;
-import com.mycompany.twinoserver.dao.DAOException;
-import com.mycompany.twinoserver.dao.EvaluerDAO;
-import com.mycompany.twinoserver.dao.TacheDAO;
+import twinoserver.dao.DAOException;
+import twinoserver.dao.EvaluerDAO;
+import twinoserver.dao.TacheDAO;
 import java.io.*;
 import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
-import com.mycompany.twinoserver.modele.TacheAtom;
+import twinoserver.modele.TacheAtom;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -171,10 +171,11 @@ public class ControleurTache extends HttpServlet {
     private void actionAfficher(HttpServletRequest request,
             HttpServletResponse response,
             TacheDAO tDAO) throws DAOException, ServletException, IOException {
-
+request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String userName = (String) session.getAttribute("utilisateur");
         request.setAttribute("competences", tDAO.getCompetences());
+        request.setCharacterEncoding("UTF-8");
         getServletContext().getRequestDispatcher(
                 "/WEB-INF/index.html").forward(request, response);
 
@@ -187,7 +188,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tacheDAO)
             throws IOException, ServletException, DAOException {
-
+request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         request.setAttribute("taches", tacheDAO.getListeTacheAtom(
                 (String) session.getAttribute("email")));
@@ -202,6 +203,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tacheDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         request.setAttribute("annonces", tacheDAO.getListeTaches(
                 (String) session.getAttribute("email")));
@@ -216,6 +218,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         getServletContext().getRequestDispatcher(
                 "/WEB-INF/historique_1.jsp").forward(request, response);
     }
@@ -227,6 +230,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         LinkedList<String> competences = tDAO.getCompetences();
         request.setAttribute("competences", competences);
         getServletContext().getRequestDispatcher(
@@ -240,6 +244,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tacheDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         int numTache = 0;
         String descriptionG = request.getParameter("descriptionGlobale");
@@ -284,6 +289,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tacheDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
 
         //Envoi des compétences nécessaires pour afficher les pages
         LinkedList<String> competences = tacheDAO.getCompetences(
@@ -327,6 +333,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tacheDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
 
         String[] competences = request.getParameterValues("competences");
         tacheDAO.modifierTache(Integer.parseInt(request.getParameter("numTache")),
@@ -347,6 +354,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tacheDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         int distance = -2;
         String adresseMailCom = null;
@@ -403,6 +411,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tacheDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
 
         //Envoi des compétences nécessaires pour afficher les pages
         LinkedList<String> competences = tacheDAO.getCompetences(
@@ -436,6 +445,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tacheDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
 
         //Envoi des compétences nécessaires pour afficher les pages
         LinkedList<String> competences = tacheDAO.getCompetences(
@@ -478,6 +488,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         if (request.getParameter("confirm").equals("Oui")) {
             int numTache = Integer.parseInt(request.getParameter("numTache"));
             int numTacheAtomique = Integer.parseInt(
@@ -494,6 +505,7 @@ public class ControleurTache extends HttpServlet {
             HttpServletResponse response,
             TacheDAO tDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         if (request.getParameter("confirm").equals("Oui")) {
             int numTache = Integer.parseInt(request.getParameter("numTache"));
             int numTacheAtomique = Integer.parseInt(
@@ -509,6 +521,7 @@ public class ControleurTache extends HttpServlet {
     private void actionEvaluer(HttpServletRequest request,
             HttpServletResponse response, EvaluerDAO eDAO, TacheDAO tDAO)
             throws DAOException, ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
         eDAO.ajouterEvaluation(Integer.parseInt(request.getParameter("numTache")),
@@ -536,6 +549,7 @@ public class ControleurTache extends HttpServlet {
     private void actionRechercherparville(HttpServletRequest request,
             HttpServletResponse response,
             TacheDAO tDAO) throws DAOException, ServletException, IOException, Exception {
+        request.setCharacterEncoding("UTF-8");
 
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBGsnFTtPeMHJAKymad5wJd-2DEutP6nko");
         GeocodingResult[] results;
@@ -589,6 +603,7 @@ public class ControleurTache extends HttpServlet {
     }
 
     private String actionInverseville(float latitude, float longitude) throws Exception {
+        
 
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBGsnFTtPeMHJAKymad5wJd-2DEutP6nko");
         GeocodingResult[] results;

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.twinoserver.dao;
+package twinoserver.dao;
 
-import com.mycompany.twinoserver.dao.DAOException;
+import twinoserver.dao.DAOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,8 +27,14 @@ public abstract class AbstractDataBaseDAO {
     }
 
     protected Connection getConnection() throws SQLException {
+<<<<<<< HEAD:TwinoServer/src/main/java/com/mycompany/twinoserver/dao/AbstractDataBaseDAO.java
    
             return dataSource.getConnection();
+=======
+        return dataSource.getConnection();
+        
+        
+>>>>>>> master:TwinoServer/src/main/java/twinoserver/dao/AbstractDataBaseDAO.java
     }
 
     /**
@@ -37,14 +43,32 @@ public abstract class AbstractDataBaseDAO {
      * @param c la connexion à fermer
      * @throws DAOException si problème lors de la fermeture de la connexion
      */
-    protected void closeConnection(Connection c) throws DAOException {
-        if (c != null) {
-            try {
+    protected void closeConnection(Connection c, ResultSet rs, Statement st) throws DAOException {
+         try {
+    
+        
+            if (rs != null) {
+                
+        rs.close();
+      }
+            
+      if (st != null) {
+          
+               
+        st.close();
+      }
+      
+          if (c != null) {
+           
+               
                 c.close();
-            } catch (SQLException sqle) {
+            }
+      }
+     
+            
+            catch (SQLException sqle) {
                 throw new DAOException("Problème fermeture de connexion avec la BD ", sqle);
             }
         }
 
     }
-}

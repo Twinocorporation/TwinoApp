@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.twinoserver.dao;
-import com.mycompany.twinoserver.modele.Evaluation;
+package twinoserver.dao;
+import twinoserver.modele.Evaluation;
 import java.awt.PageAttributes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,11 +28,12 @@ public class EvaluerDAO extends AbstractDataBaseDAO {
     	Connection conn = null;
     	ResultSet rs = null;
     	String requeteSQL = "";
+        Statement st =null;
     	try {
         	conn = getConnection();
 
         	//Ajout d'un utilisateur dans la table utilisateur
-        	Statement st = conn.createStatement();
+        	 st = conn.createStatement();
         	requeteSQL = "insert into evalue(numtache,numtacheatomique,adressemailcom,note,commentaire) values("+ numtache + "," + numtacheatomique + ",'" +adressemailcom + "'," + note + ",'" + commentaire + "')";
     
         	rs= st.executeQuery(requeteSQL);
@@ -40,7 +41,7 @@ public class EvaluerDAO extends AbstractDataBaseDAO {
     	} catch (SQLException e) {
         	throw new DAOException("Erreur BD (ajouterEvaluation)" + e.getMessage(), e);
     	} finally {
-        	closeConnection(conn);
+        	closeConnection(conn,rs,st);
     	}
 	}
 
@@ -51,9 +52,11 @@ public class EvaluerDAO extends AbstractDataBaseDAO {
     	Connection conn = null;
     	LinkedList<String> competences = new LinkedList();
     	//competences=this.getCompetences(adresseMail);
+        Statement st=null;
+        
     	try {
         	conn = getConnection();
-        	Statement st = conn.createStatement();
+        	 st = conn.createStatement();
         	requeteSQL = "SELECT note,commentaire FROM evalue WHERE adresseMailCom='" + adresseMailUtil + "'";
         	rs = st.executeQuery(requeteSQL);
         	while(rs.next())
@@ -61,7 +64,7 @@ public class EvaluerDAO extends AbstractDataBaseDAO {
     	} catch (SQLException e) {
         	throw new DAOException("Erreur BD (getListeEval)" + e.getMessage(), e);
     	} finally {
-        	closeConnection(conn);
+        	closeConnection(conn,rs,st);
     	}
     	return result;
 	}

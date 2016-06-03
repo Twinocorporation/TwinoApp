@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.twinoserver;
+package twinoserver.controleur;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
 
-import com.mycompany.twinoserver.dao.DAOException;
-import com.mycompany.twinoserver.dao.EvaluerDAO;
-import com.mycompany.twinoserver.dao.ProfilDAO;
-import com.mycompany.twinoserver.dao.TacheDAO;
-import com.mycompany.twinoserver.modele.Profil;
+import twinoserver.dao.DAOException;
+import twinoserver.dao.EvaluerDAO;
+import twinoserver.dao.ProfilDAO;
+import twinoserver.dao.TacheDAO;
+import twinoserver.modele.Profil;
 import java.io.*;
 import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
-import com.mycompany.twinoserver.modele.TacheAtom;
+import twinoserver.modele.TacheAtom;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 
 public class ControleurProfil extends HttpServlet {
 
-    @Resource(name = "jdbc/crowdsourcing_equipe2")
+    @Resource(name = "jdbc/TwinoServer")
 
     private DataSource ds;
 
@@ -44,7 +44,8 @@ public class ControleurProfil extends HttpServlet {
      * @throws javax.servlet.ServletException
      */
     @Override
-    public void doGet(HttpServletRequest request,
+  
+  public void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws IOException, ServletException {
 
@@ -76,7 +77,9 @@ public class ControleurProfil extends HttpServlet {
             } else if (action.equals("modifierProfil")
                     || action_enchaine.equals("modifierProfil")) {
                 actionModifier(request, response, profilDAO);
-            } else if (action.equals("inscriptionrecevoirservice")) {
+            } else if (action.equals("inscriptiondonnerservice")) {
+                actionInscriptiondonnerservice(request, response, profilDAO);
+            }else if (action.equals("inscriptionrecevoirservice")) {
                 actionInscriptionrecevoirservice(request, response, profilDAO);
             }else if (action.equals("creerUtilisateur")
                     || action_enchaine.equals("creerUtilisateur")) {
@@ -106,7 +109,6 @@ public class ControleurProfil extends HttpServlet {
                     Level.SEVERE, null, ex);
         }
     }
-
     public void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws IOException, ServletException {
@@ -176,12 +178,12 @@ public class ControleurProfil extends HttpServlet {
     private void actionAfficher(HttpServletRequest request,
             HttpServletResponse response,
             TacheDAO tDAO) throws DAOException, ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String userName = (String) session.getAttribute("utilisateur");
         request.setAttribute("competences", tDAO.getCompetences());
         getServletContext().getRequestDispatcher(
-                "/WEB-INF/Accueil_1.jsp").forward(request, response);
+                "/WEB-INF/justeregarder.jsp").forward(request, response);
 
     }
 
@@ -193,7 +195,7 @@ public class ControleurProfil extends HttpServlet {
             HttpServletResponse response,
             ProfilDAO profilDAO)
             throws IOException, ServletException, DAOException {
-
+        request.setCharacterEncoding("UTF-8");
         LinkedList<String> competences = profilDAO.getCompetences();
         request.setAttribute("competences", competences);
         HttpSession session = request.getSession(true);
@@ -215,6 +217,7 @@ public class ControleurProfil extends HttpServlet {
             HttpServletResponse response,
             ProfilDAO profilDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         float latitudeU = Float.parseFloat((String) request.getAttribute("latitudeT"));
         float longitudeU = Float.parseFloat((String) request.getAttribute("longitudeT"));
         String[] competences = request.getParameterValues("competences");
@@ -237,6 +240,7 @@ public class ControleurProfil extends HttpServlet {
             HttpServletResponse response,
             ProfilDAO profilDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
         LinkedList<String> competencesPossibles = profilDAO.getCompetences();
@@ -266,6 +270,7 @@ public class ControleurProfil extends HttpServlet {
     }
 
     private String actionInverseville(float latitude, float longitude) throws Exception {
+        
 
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBGsnFTtPeMHJAKymad5wJd-2DEutP6nko");
         GeocodingResult[] results;
@@ -284,10 +289,29 @@ public class ControleurProfil extends HttpServlet {
             HttpServletResponse response,
             ProfilDAO profilDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         //on envoie les compétences possibles
+<<<<<<< HEAD:TwinoServer/src/main/java/com/mycompany/twinoserver/ControleurProfil.java
        // request.setAttribute("competences", profilDAO.getCompetences());
+=======
+      request.setAttribute("competences", profilDAO.getCompetences());
+>>>>>>> master:TwinoServer/src/main/java/twinoserver/controleur/ControleurProfil.java
         getServletContext().getRequestDispatcher(
-                "/WEB-INF/newjsp.jsp").forward(request, response);
+                "/WEB-INF/inscrirejieshou.jsp").forward(request, response);
+    }
+    
+      /**
+     * Créer son compte
+     */
+    private void actionInscriptiondonnerservice(HttpServletRequest request,
+            HttpServletResponse response,
+            ProfilDAO profilDAO)
+            throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
+        //on envoie les compétences possibles
+      request.setAttribute("competences", profilDAO.getCompetences());
+        getServletContext().getRequestDispatcher(
+                "/WEB-INF/inscriretigong.jsp").forward(request, response);
     }
 
 
@@ -298,6 +322,7 @@ public class ControleurProfil extends HttpServlet {
             HttpServletResponse response,
             ProfilDAO profilDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
         String adresseMail = request.getParameter("adresseMail");
         String mdp = request.getParameter("mdp");
         String s = request.getParameter("s");
@@ -344,6 +369,7 @@ public class ControleurProfil extends HttpServlet {
             HttpServletResponse response,
             ProfilDAO profilDAO)
             throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession(true);
         LinkedList<TacheAtom> ta = null;
@@ -384,6 +410,7 @@ public class ControleurProfil extends HttpServlet {
     private void actionConsulter(HttpServletRequest request,
             HttpServletResponse response, ProfilDAO profilDAO, EvaluerDAO eDAO,
             TacheDAO tDAO) throws DAOException, ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String exec = request.getParameter("ident");
         Profil execProfil = profilDAO.getProfil(exec);
         request.setAttribute("exec", execProfil);
@@ -397,7 +424,7 @@ public class ControleurProfil extends HttpServlet {
     private void actionConnectera(HttpServletRequest request,
             HttpServletResponse response,
             TacheDAO tDAO, ProfilDAO profilDAO) throws DAOException, ServletException, IOException {
-
+request.setCharacterEncoding("UTF-8");
         String login = request.getParameter("email");
         String password = request.getParameter("mdp");
         String user = "null";
@@ -412,7 +439,7 @@ public class ControleurProfil extends HttpServlet {
             this.actionAfficher(request, response, tDAO);
         } else {
             request.setAttribute("user", user);
-            getServletContext().getRequestDispatcher("/WEB-INF/connexion_1.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/inscrirejieshou.jsp").forward(request, response);
         }
 
     }
@@ -423,6 +450,7 @@ public class ControleurProfil extends HttpServlet {
     private void actionLogout(HttpServletRequest request,
             HttpServletResponse response,
             TacheDAO tDAO) throws DAOException, ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
         session.invalidate();
@@ -442,7 +470,7 @@ public class ControleurProfil extends HttpServlet {
     private void actionRecevoirservice(HttpServletRequest request,
             HttpServletResponse response ,
             TacheDAO tDAO) throws DAOException, ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         getServletContext().getRequestDispatcher("/WEB-INF/recevoirservice.jsp").forward(request, response);
       
     }
@@ -450,7 +478,7 @@ public class ControleurProfil extends HttpServlet {
         private void actionDonnerservice(HttpServletRequest request,
             HttpServletResponse response ,
             TacheDAO tDAO) throws DAOException, ServletException, IOException {
-
+request.setCharacterEncoding("UTF-8");
         getServletContext().getRequestDispatcher("/WEB-INF/donnerservice.jsp").forward(request, response);
       
     }
@@ -458,7 +486,7 @@ public class ControleurProfil extends HttpServlet {
         
     private void actionJusteregarder(HttpServletRequest request,
             HttpServletResponse response) throws DAOException, ServletException, IOException {
-
+request.setCharacterEncoding("UTF-8");
         getServletContext().getRequestDispatcher("/WEB-INF/recevoirservice.jsp").forward(request, response);
       
     }
