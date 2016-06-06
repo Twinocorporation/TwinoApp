@@ -1,3 +1,10 @@
+<%-- 
+    Document   : index
+    Created on : 6 juin 2016, 11:25:07
+    Author     : user
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +13,7 @@
 
 	<!-- Template site title
    ================================================== -->
-	<title>Twnio-留法了吗？</title>
+	<title>Twnio-&#30041;&#27861;&#20102;&#21527;？</title>
 
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,8 +68,13 @@
 
 </section>
 
-
-<!-- Navigation section================================================== -->
+<%
+      	String var= (String) session.getAttribute("utilisateur");
+      	 
+        	if (var != null) { %>
+            	<%@ include file="/WEB-INF/headerconnecte.jsp" %>
+        	<%  }else{ %>
+            	<!-- Navigation section================================================== -->
 <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
 	<div class="container">
 
@@ -79,14 +91,17 @@
             
 				<!-- <li><a href="#home" class="smoothScroll">HOME</a></li> -->
                 
-				<li><a href="#work" class="smoothScroll">关于我们</a></li>
-				<li><a href="#team" class="smoothScroll">团队介绍</a></li>	
-				<li><a href="#contact" class="smoothScroll">联系我们</a></li>
+				<li><a href="#work" class="smoothScroll">&#20851;&#20110;&#25105;&#20204;</a></li>
+				<li><a href="#team" class="smoothScroll">&#22242;&#38431;&#20171;&#32461;</a></li>	
+				<li><a href="#contact" class="smoothScroll">&#32852;&#31995;&#25105;&#20204;</a></li>
 			</ul>
 		</div>
 
 	</div>
 </section>
+            	<% }
+ %>
+
 
 
 <!-- Homepage section
@@ -100,12 +115,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="slider-caption">
-                                <h2>留法了吗？</h2>
-                                <p class="color-white">留学法国，我们为你想得更多！</p>
+                                <h2>&#30041;&#27861;&#20102;&#21527;？</h2>
+                                <p class="color-white">&#30041;&#23398;&#27861;&#22269;&#65292;&#25105;&#20204;&#20026;&#20320;&#24819;&#24471;&#26356;&#22810;！</p>
 									<div class="whitebutton_home">
-					<a href="controleurProfil?action=connexionrecevoirservice" ><button class="btn btn-default">我想得到服务</button></a>
-                                        <a href="controleurProfil?action=connexiondonnerservice" ><button class="btn btn-default">我想提供服务</button></a>
-                                        <a href="controleurProfil?action=justeregarder" ><button class="btn btn-default">我想随便看看</button></a>
+					<a href="controleurProfil?action=connexionrecevoirservice" ><button class="btn btn-default">&#25105;&#24819;&#24471;&#21040;&#26381;&#21153;</button></a>
+                                        <a href="controleurProfil?action=connexiondonnerservice" ><button class="btn btn-default">&#25105;&#24819;&#25552;&#20379;&#26381;&#21153;</button></a>
+                                        <a href="controleurProfil?action=justeregarder" ><button class="btn btn-default">&#25105;&#24819;&#38543;&#20415;&#30475;&#30475;</button></a>
                                         
 									</div>
                             </div>
@@ -132,9 +147,9 @@
 			<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 				<div class="section-title">
 					<h5 class="wow bounceIn">Twino Service</h5>
-					<h1 class="heading">我们的服务</h1>
+					<h1 class="heading">&#25105;&#20204;&#30340;&#26381;&#21153;</h1>
 					<hr>
-					<p>在法国人生地不熟，语言又不通怎么办? 没关系，我们来帮您解决问题!</p>
+					<p>&#22312;&#27861;&#22269;&#20154;&#29983;&#22320;&#19981;&#29087;&#65292;&#35821;&#35328;&#21448;&#19981;&#36890;&#24590;&#20040;&#21150;? &#27809;&#20851;&#31995;&#65292;&#25105;&#20204;&#26469;&#24110;&#24744;&#35299;&#20915;&#38382;&#39064;!</p>
 				</div>
 			</div>
 
@@ -197,7 +212,7 @@
 			<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 				<div class="section-title">
 					<h5 class="wow bounceIn">Twino Team</h5>
-					<h1 class="heading">我们的团队</h1>
+					<h1 class="heading">&#25105;&#20204;&#30340;&#22242;&#38431;</h1>
 					<hr>
 					<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteu sunt in culpa qui officia deserunt.</p>
 				</div>
@@ -210,7 +225,7 @@
 				<div class="team-wrapper">
 					<img src="images/team1.jpg" class="img-responsive" alt="team img">
 						<div class="team-des">
-							<h4>黄奇伟</h4>
+							<h4>&#40644;&#22855;&#20255;</h4>
 							<h3>Trip Manager</h3>
 							<ul class="social-icon">
 								<li><a href="#" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
@@ -228,7 +243,7 @@
 				<div class="team-wrapper">
 					<img src="images/team2.jpg" class="img-responsive" alt="team img">
 						<div class="team-des">
-							<h4>韩任飞</h4>
+							<h4>&#38889;&#20219;&#39134;</h4>
 							<h3>Location Explorer</h3>
 							<ul class="social-icon">
 								<li><a href="#" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
@@ -244,7 +259,7 @@
 				<div class="team-wrapper">
 					<img src="images/team3.jpg" class="img-responsive" alt="team img">
 						<div class="team-des">
-							<h4>刘里遥</h4>
+							<h4>&#21016;&#37324;&#36965;</h4>
 							<h3>Location Explorer</h3>
 							<ul class="social-icon">
 								<li><a href="#" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
@@ -260,7 +275,7 @@
 				<div class="team-wrapper">
 					<img src="images/team4.jpg" class="img-responsive" alt="team img">
 						<div class="team-des">
-							<h4>谢靖远</h4>
+							<h4>&#35874;&#38742;&#36828;</h4>
 							<h3>Location Explorer</h3>
 							<ul class="social-icon">
 								<li><a href="#" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
@@ -287,9 +302,9 @@
 			<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 				<div class="section-title">
 					<h5 class="wow bounceIn">Contact Us</h5>
-					<h1 class="heading">联系我们</h1>
+					<h1 class="heading">&#32852;&#31995;&#25105;&#20204;</h1>
 					<hr>
-					<p>有任何关于留学法国的问题都可以联系我们！</p>
+					<p>&#26377;&#20219;&#20309;&#20851;&#20110;&#30041;&#23398;&#27861;&#22269;&#30340;&#38382;&#39064;&#37117;&#21487;&#20197;&#32852;&#31995;&#25105;&#20204;！</p>
 				</div>
 			</div>
 
@@ -298,19 +313,19 @@
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
 				<form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.6s">
 					<div class="col-md-4 col-sm-6">
-						<input type="text" class="form-control" placeholder="名字" name="name">
+						<input type="text" class="form-control" placeholder="&#21517;&#23383;" name="name">
 					</div>
 					<div class="col-md-4 col-sm-6">
-						<input type="email" class="form-control" placeholder="邮箱" name="email">
+						<input type="email" class="form-control" placeholder="&#37038;&#31665;" name="email">
 					</div>
 					<div class="col-md-4 col-sm-12">
-						<input type="text" class="form-control" placeholder="标题" name="subject">
+						<input type="text" class="form-control" placeholder="&#26631;&#39064;" name="subject">
 					</div>
 					<div class="col-md-12 col-sm-12">
-						<textarea class="form-control" placeholder="内容" rows="7" name="message"></textarea>
+						<textarea class="form-control" placeholder="&#20869;&#23481;" rows="7" name="message"></textarea>
 					</div>
 					<div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-						<input type="submit" class="form-control" value="发送">
+						<input type="submit" class="form-control" value="&#21457;&#36865;">
 					</div>
 				</form>
 			</div>
@@ -351,7 +366,7 @@
 				</ul>
 				<p>2016 Twino 
                 
-                | Design: <a rel="nofollow" href="http://www.tooplate.com" target="_parent">Twnio</a></p>
+                | Design: <a rel="nofollow"  target="_parent">Twnio</a></p>
 
 			</div>
 		</div>

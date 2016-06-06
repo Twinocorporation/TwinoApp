@@ -81,9 +81,10 @@ public class ControleurProfil extends HttpServlet {
                 actionInscriptiondonnerservice(request, response, profilDAO);
             }else if (action.equals("inscriptionrecevoirservice")) {
                 actionInscriptionrecevoirservice(request, response, profilDAO);
-            }else if (action.equals("creerUtilisateur")
-                    || action_enchaine.equals("creerUtilisateur")) {
-                actionCreerUtilisateur(request, response, profilDAO);
+            }else if (action.equals("creerUtilisateurjieshou")) {
+                actionCreerUtilisateurjieshou(request, response, profilDAO);
+            }else if (action.equals("creerUtilisateurtigong")) {
+                actionCreerUtilisateurtigong(request, response, profilDAO);
             } else if (action.equals("menuProfil")
                     || action_enchaine.equals("menuProfil")) {
                 actionMenuProfil(request, response, profilDAO);
@@ -143,9 +144,10 @@ public class ControleurProfil extends HttpServlet {
                 actionModifier(request, response, profilDAO);
             } else if (action.equals("inscriptionrecevoirservice")) {
                 actionInscriptionrecevoirservice(request, response, profilDAO);
-            }else if (action.equals("creerUtilisateur")
-                    || action_enchaine.equals("creerUtilisateur")) {
-                actionCreerUtilisateur(request, response, profilDAO);
+            }else if (action.equals("creerUtilisateurjieshou")) {
+                actionCreerUtilisateurjieshou(request, response, profilDAO);
+            }else if (action.equals("creerUtilisateurtigong")) {
+                actionCreerUtilisateurtigong(request, response, profilDAO);
             } else if (action.equals("menuProfil")
                     || action_enchaine.equals("menuProfil")) {
                 actionMenuProfil(request, response, profilDAO);
@@ -183,7 +185,7 @@ public class ControleurProfil extends HttpServlet {
         String userName = (String) session.getAttribute("utilisateur");
         request.setAttribute("competences", tDAO.getCompetences());
         getServletContext().getRequestDispatcher(
-                "/WEB-INF/justeregarder.jsp").forward(request, response);
+                "/WEB-INF/index.jsp").forward(request, response);
 
     }
 
@@ -227,7 +229,7 @@ public class ControleurProfil extends HttpServlet {
                 request.getParameter("dateNaissance"),
                 Integer.parseInt(request.getParameter("sexe")),
                 latitudeU,
-                longitudeU, competences);
+                longitudeU, competences, Integer.parseInt(request.getParameter("telephone")));
         this.actionMenuProfil(request, response, profilDAO);
     }
 
@@ -314,21 +316,22 @@ public class ControleurProfil extends HttpServlet {
     /**
      * Créer un utilisateur
      */
-    private void actionCreerUtilisateur(HttpServletRequest request,
+    private void actionCreerUtilisateurjieshou(HttpServletRequest request,
             HttpServletResponse response,
             ProfilDAO profilDAO)
             throws IOException, ServletException, DAOException {
         request.setCharacterEncoding("UTF-8");
         String adresseMail = request.getParameter("adresseMail");
         String mdp = request.getParameter("mdp");
-        String s = request.getParameter("s");
+        String server_password_2 = request.getParameter("server_password_2");
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
         String sexe = request.getParameter("sexe");
         String dateNaissance = request.getParameter("dateNaissance");
-        Float latitudeT = Float.parseFloat((String) request.getAttribute("latitudeT"));
-        Float longitudeT = Float.parseFloat((String) request.getAttribute("longitudeT"));
+        double latitudeU = 0;
+        double longitudeU = 0;
         String[] competences = request.getParameterValues("competences");
+        String telephone = request.getParameter("telephone");
 
         request.setAttribute("competences", profilDAO.getCompetences());
         if (competences != null) {
@@ -336,26 +339,111 @@ public class ControleurProfil extends HttpServlet {
         }
 
         if (adresseMail == null || mdp == null || nom == null || prenom == null
-                || sexe == null || dateNaissance == null || s == null
+                || sexe == null || dateNaissance == null || server_password_2 == null
                 || adresseMail.equals("") || mdp.equals("")
-                || s.equals("") || nom.equals("") || prenom.equals("")
+                || server_password_2.equals("") || nom.equals("") || prenom.equals("")
                 || dateNaissance.equals("") || sexe.equals("")) {
             request.setAttribute("manquant", "oui");
-            getServletContext().getRequestDispatcher("/WEB-INF/inscription_1.jsp").
+            getServletContext().getRequestDispatcher("/WEB-INF/inscrirejieshou.jsp").
                     forward(request, response);
-        } else if (!mdp.equals(s)) {
+        } else if (!mdp.equals(server_password_2)) {
             request.setAttribute("mdp", "oui");
-            getServletContext().getRequestDispatcher("/WEB-INF/inscription_1.jsp").
+            getServletContext().getRequestDispatcher("/WEB-INF/inscrirejieshou.jsp").
                     forward(request, response);
         } else {
             profilDAO.ajouterUtilisateur(adresseMail, mdp, nom, prenom,
                     Integer.parseInt(sexe),
-                    dateNaissance, latitudeT, longitudeT, competences);
+                    dateNaissance, latitudeU, longitudeU, competences, Integer.parseInt(telephone));
             //TacheDAO tDAO = new TacheDAO(ds);
-            this.actionMenuProfil(request, response, profilDAO);
+            
+            HttpSession session = request.getSession(true);
+        LinkedList<TacheAtom> ta = null;
+        String utilisateur = (String) session.getAttribute("utilisateur");
+        TacheDAO tDAO = new TacheDAO(ds);
+        if (competences == null) {
+            ta = tDAO.search(null, "", "", latitudeU, longitudeU, -10, 30, (String) session.getAttribute("email"));
+        } else {
+            String[] compet = new String[100];
+            int k = 0;
+            for (String comp : competences) {
+                compet[k] = comp;
+                k++;
+            }
+            ta = tDAO.search(compet, "", "", latitudeU, longitudeU, -10, 30, (String) session.getAttribute("email"));
+        }
+        if (ta.size() == 0) {
+            ta = tDAO.search(null, "", "", latitudeU, longitudeU, -10, 100000, (String) session.getAttribute("email"));
+        }
+        request.setAttribute("tacheAtom", ta);
+        request.setAttribute("competences", competences);
+            getServletContext().getRequestDispatcher("/WEB-INF/votreProfil.jsp").forward(request, response);
         }
     }
 
+    
+       private void actionCreerUtilisateurtigong(HttpServletRequest request,
+            HttpServletResponse response,
+            ProfilDAO profilDAO)
+            throws IOException, ServletException, DAOException {
+        request.setCharacterEncoding("UTF-8");
+        String adresseMail = request.getParameter("adresseMail");
+        String mdp = request.getParameter("mdp");
+        String server_password_2 = request.getParameter("server_password_2");
+        String nom = request.getParameter("nom");
+        String prenom = request.getParameter("prenom");
+        String sexe = request.getParameter("sexe");
+        String dateNaissance = request.getParameter("dateNaissance");
+        double latitudeU = 0;
+        double longitudeU = 0;
+        String[] competences = request.getParameterValues("competences");
+        String telephone = request.getParameter("telephone");
+
+        request.setAttribute("competences", profilDAO.getCompetences());
+        if (competences != null) {
+            request.setAttribute("competences_selected", new LinkedList(Arrays.asList(competences)));
+        }
+
+        if (adresseMail == null || mdp == null || nom == null || prenom == null
+                || sexe == null || dateNaissance == null || server_password_2 == null
+                || adresseMail.equals("") || mdp.equals("")
+                || server_password_2.equals("") || nom.equals("") || prenom.equals("")
+                || dateNaissance.equals("") || sexe.equals("")) {
+            request.setAttribute("manquant", "oui");
+            getServletContext().getRequestDispatcher("/WEB-INF/inscrirejieshou.jsp").
+                    forward(request, response);
+        } else if (!mdp.equals(server_password_2)) {
+            request.setAttribute("mdp", "oui");
+            getServletContext().getRequestDispatcher("/WEB-INF/inscrirejieshou.jsp").
+                    forward(request, response);
+        } else {
+            profilDAO.ajouterUtilisateur(adresseMail, mdp, nom, prenom,
+                    Integer.parseInt(sexe),
+                    dateNaissance, latitudeU, longitudeU, competences, Integer.parseInt(telephone));
+            //TacheDAO tDAO = new TacheDAO(ds);
+            
+            HttpSession session = request.getSession(true);
+        LinkedList<TacheAtom> ta = null;
+        String utilisateur = (String) session.getAttribute("utilisateur");
+        TacheDAO tDAO = new TacheDAO(ds);
+        if (competences == null) {
+            ta = tDAO.search(null, "", "", latitudeU, longitudeU, -10, 30, (String) session.getAttribute("email"));
+        } else {
+            String[] compet = new String[100];
+            int k = 0;
+            for (String comp : competences) {
+                compet[k] = comp;
+                k++;
+            }
+            ta = tDAO.search(compet, "", "", latitudeU, longitudeU, -10, 30, (String) session.getAttribute("email"));
+        }
+        if (ta.size() == 0) {
+            ta = tDAO.search(null, "", "", latitudeU, longitudeU, -10, 100000, (String) session.getAttribute("email"));
+        }
+        request.setAttribute("tacheAtom", ta);
+        request.setAttribute("competences", competences);
+            getServletContext().getRequestDispatcher("/WEB-INF/votreProfil.jsp").forward(request, response);
+        }
+    }
     /**
      * Redirige vers la page qui permet de menu du profil qui propose de
      * modifier son profil, de voir ses annonces, ses tâches en cours
@@ -397,7 +485,7 @@ public class ControleurProfil extends HttpServlet {
         }
         request.setAttribute("tacheAtom", ta);
         request.setAttribute("competences", competences);
-        getServletContext().getRequestDispatcher("/WEB-INF/votreProfil_1.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/votreProfil.jsp").forward(request, response);
     }
 
     /**

@@ -90,19 +90,22 @@
             <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 
 
-                <form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.6s">
+                <form action="controleurProfil?action=creerUtilisateurjieshou" method="POST" class="wow fadeInUp" data-wow-delay="0.6s">
+                   
+
+                    
                     <div class="col-md-12 col-sm-18" style="height: 35px; border-bottom: 3px solid #eee; font-size: 25px; text-align: center">
                         &#20197;&#19979;&#20026;&#24517;&#22635;&#20449;&#24687;
                     </div> 
                     <div class="col-md-2 col-sm-3" style="height:35px">
 
 
-                        <input type="radio" id="radio01" name="radio" >
+                        <input type="radio" id="radio01" name="sexe"  value="0">
                         <label for="radio01"><span></span>&#30007;&#29983;</label>
                     </div>
 
                     <div class="col-md-2 col-sm-3" style="height:35px">
-                        <input type="radio" id="radio02" name="radio" >
+                        <input type="radio" id="radio02" name="sexe" value="1">
                         <label for="radio02"><span></span>&#22899;&#29983;</label>
                     </div>
                     <div class="col-md-8 col-sm-0" style="height:35px">
@@ -110,24 +113,24 @@
                     </div>
 
                     <div class="col-md-4 col-sm-18">
-                        <input type="text" class="form-control" placeholder="&#22995;&#27663;" name="server_nom">
+                        <input type="text" class="form-control" placeholder="&#22995;&#27663;" name="nom" value="${param.nom}"  >
                     </div>
                     
                     <div class="col-md-4 col-sm-18">
-                        <input type="text" class="form-control" placeholder="&#21517;&#23383;" name="server_prenom">
+                        <input type="text" class="form-control" placeholder="&#21517;&#23383;" name="prenom" value="${param.prenom}"  >
                     </div>
                     <div class="col-md-4 col-sm-18">
-                        <input type="text" class="form-control" placeholder="&#29983;&#26085;:yyyy-mm-dd" name="server_birthday">
+                        <input type="text" class="form-control" placeholder="&#29983;&#26085;:yyyy-mm-dd" name="dateNaissance" >
                     </div>
 
                     <div class="col-md-12 col-sm-18">
-                        <input type="text" class="form-control" placeholder="&#37038;&#31665;" name="server_mail">
+                        <input type="email" class="form-control" value="${param.adresseMail}"  placeholder="&#37038;&#31665;" name="adresseMail">
                     </div>
                     <div class="col-md-6 col-sm-18">
-                        <input type="password" class="form-control" placeholder="&#23494;&#30721;" name="server_password">
+                        <input type="password" class="form-control" placeholder="&#23494;&#30721;" value="${param.mdp}" name="mdp">
                     </div>                       
                     <div class="col-md-6 col-sm-18" >
-                        <input type="password" class="form-control" placeholder="&#30830;&#35748;&#23494;&#30721;" name="server_password_2">
+                        <input type="password" class="form-control" placeholder="&#30830;&#35748;&#23494;&#30721;" name="server_password_2" value="${param.server_password_2}" >
                     </div> 
 
                     
@@ -185,7 +188,7 @@
             })();
         </script>
                     <div class="col-md-12 col-sm-18">
-                        <input type="text" class="form-control" placeholder="&#30005;&#35805;&#21495;&#30721;" name="server_phone">
+                        <input type="text" class="form-control" placeholder="&#30005;&#35805;&#21495;&#30721;" name="telephone" value="${param.telephone}">
                     </div>
 
                     <div class="col-md-12 col-sm-18" style="height: 54px; border-bottom: 3px solid #eee">
@@ -203,7 +206,7 @@
                         <a href="recevoirservice.jsp" ><button class="btn btn-default">&#25552;&#20132;&#27880;&#20876;</button></a>
                     </div>
 
-
+                  
                 </form>
 
             </div>

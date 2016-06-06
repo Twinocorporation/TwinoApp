@@ -177,7 +177,7 @@ request.setCharacterEncoding("UTF-8");
         request.setAttribute("competences", tDAO.getCompetences());
         request.setCharacterEncoding("UTF-8");
         getServletContext().getRequestDispatcher(
-                "/WEB-INF/index.html").forward(request, response);
+                "/WEB-INF/index.jsp").forward(request, response);
 
     }
 
@@ -551,7 +551,7 @@ request.setCharacterEncoding("UTF-8");
             TacheDAO tDAO) throws DAOException, ServletException, IOException, Exception {
         request.setCharacterEncoding("UTF-8");
 
-        GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBGsnFTtPeMHJAKymad5wJd-2DEutP6nko");
+    /*    GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBGsnFTtPeMHJAKymad5wJd-2DEutP6nko");
         GeocodingResult[] results;
         float latitude = 1000;
         float longitude = 1000;
@@ -565,7 +565,7 @@ request.setCharacterEncoding("UTF-8");
             longitude = (float) geometri.location.lng;
         }
         request.setAttribute("latitudeT", String.valueOf(latitude));
-        request.setAttribute("longitudeT", String.valueOf(longitude));
+        request.setAttribute("longitudeT", String.valueOf(longitude));*/
 
         if (request.getParameter("what").equals("recherche")) {
             this.actionSearchAnnonce(request, response, tDAO);
@@ -582,7 +582,7 @@ request.setCharacterEncoding("UTF-8");
             this.actionModifAnnonce(request, response, tDAO);
         }
 
-        if (request.getParameter("what").equals("annonce")) {
+    /*    if (request.getParameter("what").equals("annonce")) {
             int k = 0;
             String[] lat = new String[100];
             String[] longi = new String[100];
@@ -599,7 +599,7 @@ request.setCharacterEncoding("UTF-8");
             request.setAttribute("latitude", lat);
             request.setAttribute("longitude", longi);
             this.actionDeposerAnnonce(request, response, tDAO);
-        }
+        }*/
     }
 
     private String actionInverseville(float latitude, float longitude) throws Exception {
