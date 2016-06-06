@@ -1,1 +1,27 @@
-Thu May 26 20:58:10 CEST 2016 : Apache Derby 网络服务器 - 10.11.1.2 - (1629631) 已启动并准备接受端口 1527 上的连接
+Mon Jun 06 11:34:36 CEST 2016 : Apache Derby Network Server - 10.11.1.2 - (1629631) d茅marr茅 et pr锚t 脿 accepter les connexions sur le port 1527
+----------------------------------------------------------------
+Mon Jun 06 11:34:37 CEST 2016:
+Amor莽age de Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631) : instance a816c00e-0155-2510-59a0-0000210e60b8 
+dans le r茅pertoire de base de donn茅es /Users/user/Desktop/TwinoApp/DataBaseTwino/TwinoApp avec le chargeur de classe sun.misc.Launcher$AppClassLoader@6f94fa3e
+Charg茅 de file:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_91-b14
+user.dir=/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/db
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.11.4
+derby.system.home=/Users/user/Desktop/TwinoApp/DataBaseTwino
+Chargeur de classe de la base de donn茅es d茅marr茅 - derby.database.classpath = ''
+----------------------------------------------------------------
+Mon Jun 06 11:34:45 CEST 2016:
+Amor莽age de Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631) : instance 98ec802c-0155-2510-59a0-0000210e60b8 
+dans le r茅pertoire de base de donn茅es /Users/user/Desktop/TwinoApp/DataBaseTwino/Twino avec le chargeur de classe sun.misc.Launcher$AppClassLoader@6f94fa3e
+Charg茅 de file:/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_91-b14
+user.dir=/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/db
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.11.4
+derby.system.home=/Users/user/Desktop/TwinoApp/DataBaseTwino
+Chargeur de classe de la base de donn茅es d茅marr茅 - derby.database.classpath = ''
