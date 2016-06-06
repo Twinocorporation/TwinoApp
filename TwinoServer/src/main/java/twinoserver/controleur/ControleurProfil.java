@@ -293,7 +293,9 @@ public class ControleurProfil extends HttpServlet {
             throws IOException, ServletException, DAOException {
         request.setCharacterEncoding("UTF-8");
         //on envoie les compétences possibles
+       // request.setAttribute("competences", profilDAO.getCompetences());
       request.setAttribute("competences", profilDAO.getCompetences());
+
         getServletContext().getRequestDispatcher(
                 "/WEB-INF/inscrirejieshou.jsp").forward(request, response);
     }

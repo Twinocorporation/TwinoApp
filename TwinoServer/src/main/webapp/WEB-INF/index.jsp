@@ -9,16 +9,22 @@
 <html>
 <head>
 
-	<meta charset="utf-8">
+	
 
 	<!-- Template site title
    ================================================== -->
+
 	<title>Twnio-&#30041;&#27861;&#20102;&#21527;？</title>
 
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="">
 	<meta name="description" content="">
+
+<meta charset="UTF-8">
+<!--
+=======
+>>>>>>> master
 
 	<!-- Bootstrap CSS
    ================================================== -->
