@@ -26,7 +26,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
     /**
      * Ajoute un profil dans la base utilisateur (uniquement).
      */
-    public void ajouterUtilisateur(String adresseMail, String mdp, String nom, String prenom, int sexe, String dateNaissance, double latitudeU, double longitudeU, String[] competences) throws DAOException {
+    public void ajouterUtilisateur(String adresseMail, String mdp, String nom, String prenom, int sexe, String dateNaissance, double latitudeU, double longitudeU, String[] competences, int telephone) throws DAOException {
         Connection conn = null;
         ResultSet rs = null;
         PreparedStatement st =null;
@@ -35,7 +35,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
 
             //Ajout d'un utilisateur dans la table utilisateur
            st = conn.prepareStatement(
-            "insert into utilisateur(adresseMail,mdp,sexe,nom,prenom,dateNaissance,latitudeU,longitudeU) values(?,?,?,?,?,TO_DATE(?,'YYYY-MM-DD'),?,?)");
+            "insert into utilisateur(adresseMail,mdp,sexe,nom,prenom,dateNaissance,latitudeU,longitudeU,telephone) values(?,?,?,?,?,?,?,?,?)");
  st.setString(1, adresseMail);
             st.setString(2, mdp);
             st.setInt(3, sexe);
@@ -44,6 +44,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
             st.setString(6, dateNaissance);
             st.setDouble(7,  latitudeU);
             st.setDouble(8,  longitudeU);
+            st.setDouble(9,  telephone);
             st.executeUpdate();
 
             //Ajout d'un utilisateur dans la table possede pour avoir acces à ses compétences
@@ -79,7 +80,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
             requeteSQL = "SELECT * FROM utilisateur WHERE adresseMail='" + adresseMail + "'";
             rs = st.executeQuery(requeteSQL);
             rs.next();
-            result = new Profil(rs.getString("adresseMail"), rs.getString("mdp"), rs.getString("nom"), rs.getString("prenom"), rs.getString("sexe"), rs.getString("dateNaissance").substring(0, 10), rs.getFloat("latitudeU"), rs.getFloat("longitudeU"), competences);
+            result = new Profil(rs.getString("adresseMail"), rs.getString("mdp"), rs.getString("nom"), rs.getString("prenom"), rs.getString("sexe"), rs.getString("dateNaissance").substring(0, 10), rs.getFloat("latitudeU"), rs.getFloat("longitudeU"), competences,rs.getInt("telephone"));
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getProfil)" + e.getMessage(), e);
         } finally {
@@ -144,7 +145,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
      * nouveaux paramètres spécifiés Par contre non modification possible avec
      * cette methode de l'adresseMail
      */
-    public void modifierProfil(String adresseMail, String mdp, String nom, String prenom, String dateNaissance, int sexe, double latitudeU, double longitudeU, String[] competences) throws DAOException, IllegalArgumentException {
+    public void modifierProfil(String adresseMail, String mdp, String nom, String prenom, String dateNaissance, int sexe, double latitudeU, double longitudeU, String[] competences, int telephone) throws DAOException, IllegalArgumentException {
         ResultSet rs = null;
         String requeteSQL = "";
         Connection conn = null;
@@ -156,7 +157,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
 
             //On met à jour le profil de l'utilisateur
             st = conn.prepareStatement(
-                    "UPDATE utilisateur SET mdp = ?, nom = ?, prenom = ?, sexe = ?, dateNaissance = TO_DATE('" + dateNaissance + "','YYYY-MM-DD'),latitudeU = ?, longitudeU = ? WHERE adresseMail = ?");
+                    "UPDATE utilisateur SET mdp = ?, nom = ?, prenom = ?, sexe = ?, dateNaissance = TO_DATE('" + dateNaissance + "','YYYY-MM-DD'),latitudeU = ?, longitudeU = ?, telephone= ? WHERE adresseMail = ?");
             st.setString(1, mdp);
             st.setString(2, nom);
             st.setString(3, prenom);
@@ -164,6 +165,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
             st.setDouble(5, latitudeU);
             st.setDouble(6, longitudeU);
             st.setString(7, adresseMail);
+            st.setInt(8, telephone );
             st.executeUpdate();
 
             //On récupère dans tableCompetence les différentes compétences possibles
@@ -197,8 +199,8 @@ public class ProfilDAO extends AbstractDataBaseDAO {
         try {
             conn = getConnection();
             st = conn.createStatement();
-            requeteSQL = "DELETE FROM omaraz.utilisateur WHERE adresseMail=" + adresseMail;
-            requeteSQL = "DELETE FROM omaraz.possede WHERE adresseMail=" + adresseMail;
+            requeteSQL = "DELETE FROM utilisateur WHERE adresseMail=" + adresseMail;
+            requeteSQL = "DELETE FROM possede WHERE adresseMail=" + adresseMail;
             st.executeQuery(requeteSQL);
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (supprimer)" + e.getMessage(), e);
@@ -220,7 +222,7 @@ public class ProfilDAO extends AbstractDataBaseDAO {
             requeteSQL = "SELECT * FROM utilisateur WHERE adresseMail='" + login + "' AND mdp='" + mdp + "'";
             rs = st.executeQuery(requeteSQL);
             while (rs.next()) {
-                result = new Profil(rs.getString("adresseMail"), rs.getString("mdp"), rs.getString("nom"), rs.getString("prenom"), rs.getString("sexe"), rs.getString("dateNaissance").substring(0, 10), rs.getInt("latitudeU"), rs.getInt("longitudeU"), null);
+                result = new Profil(rs.getString("adresseMail"), rs.getString("mdp"), rs.getString("nom"), rs.getString("prenom"), rs.getString("sexe"), rs.getString("dateNaissance").substring(0, 10), rs.getInt("latitudeU"), rs.getInt("longitudeU"), null,rs.getInt("telephone"));
             }
         } catch (SQLException e) {
             throw new DAOException("Erreur BD (getProfil)" + e.getMessage(), e);

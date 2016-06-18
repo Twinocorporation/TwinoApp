@@ -18,10 +18,11 @@ public class Profil {
     private float latitudeU;
     private float longitudeU;
     private LinkedList<String> competences;
+    private int telephone;
 
     public Profil(String adresseMail, String mdp, String nom, String prenom,
             String sexe, String dateNaissance, float latitudeU, float longitudeU,
-            LinkedList<String> competences) {
+            LinkedList<String> competences, int telephone) {
         this.adresseMail = adresseMail;
         this.dateNaissance = dateNaissance;
         this.latitudeU = latitudeU;
@@ -31,6 +32,7 @@ public class Profil {
         this.prenom = prenom;
         this.sexe = sexe;
         this.competences = competences;
+        this.telephone= telephone;
     }
 
     public String getAdresseMail() {
@@ -68,10 +70,14 @@ public class Profil {
     public LinkedList<String> getCompetences() {
         return this.competences;
     }
+    
+     public int getTelephone() {
+        return this.telephone;
+    }
 
     @Override
     public String toString() {
-        String result = "TacheAtom{" + "adresseMail=" + adresseMail + "password="
+        String result = "TacheAtom{" + "adresseMail=" + adresseMail +"telephone=" + telephone + "password="
                 + mdp + "nom=" + nom + ",prenom=" + prenom + ", sexe=" + sexe
                 + "dateNaissance=" + dateNaissance + ",latitudeU=" + latitudeU
                 + ", longitudeU=" + longitudeU + "competences=";

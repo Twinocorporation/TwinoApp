@@ -4,6 +4,7 @@
     Author     : user
 --%>
 
+<%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -96,19 +97,19 @@
             <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 
 
-                <form action="#" method="post" class="wow fadeInUp" data-wow-delay="0.6s">
+                <form action="controleurProfil?action=creerUtilisateurtigong" method="POST" class="wow fadeInUp" data-wow-delay="0.6s">
                     <div class="col-md-12 col-sm-18" style="height: 35px; border-bottom: 3px solid #eee; font-size: 25px; text-align: center">
                         &#20197;&#19979;&#20026;&#24517;&#22635;&#20449;&#24687;
                     </div> 
                     <div class="col-md-2 col-sm-3" style="height:35px">
 
 
-                        <input type="radio" id="radio01" name="radio" >
+                        <input type="radio" id="radio01" name="sexe"  value="0">
                         <label for="radio01"><span></span>&#30007;&#29983;</label>
                     </div>
 
                     <div class="col-md-2 col-sm-3" style="height:35px">
-                        <input type="radio" id="radio02" name="radio" >
+                        <input type="radio" id="radio02" name="sexe" value="1">
                         <label for="radio02"><span></span>&#22899;&#29983;</label>
                     </div>
                     <div class="col-md-8 col-sm-0" style="height:35px">
@@ -116,44 +117,52 @@
                     </div>
 
                     <div class="col-md-4 col-sm-18">
-                        <input type="text" class="form-control" placeholder="&#22995;&#27663;" name="server_nom">
+                        <input type="text" class="form-control" placeholder="&#22995;&#27663;" name="nom" value="${param.nom}"  >
                     </div>
                     
                     <div class="col-md-4 col-sm-18">
-                        <input type="text" class="form-control" placeholder="&#21517;&#23383;" name="server_prenom">
+                        <input type="text" class="form-control" placeholder="&#21517;&#23383;" name="prenom" value="${param.prenom}"  >
                     </div>
                     <div class="col-md-4 col-sm-18">
-                        <input type="text" class="form-control" placeholder="&#29983;&#26085;:yyyy-mm-dd" name="server_birthday">
+                        <input type="text" class="form-control" placeholder="&#29983;&#26085;:yyyy-mm-dd" name="dateNaissance" >
                     </div>
 
                     <div class="col-md-12 col-sm-18">
-                        <input type="text" class="form-control" placeholder="&#37038;&#31665;" name="server_mail">
+                        <input type="email" class="form-control" value="${param.adresseMail}"  placeholder="&#37038;&#31665;" name="adresseMail">
                     </div>
                     <div class="col-md-6 col-sm-18">
-                        <input type="password" class="form-control" placeholder="&#23494;&#30721;" name="server_password">
+                        <input type="password" class="form-control" placeholder="&#23494;&#30721;" value="${param.mdp}" name="mdp">
                     </div>                       
                     <div class="col-md-6 col-sm-18" >
-                        <input type="password" class="form-control" placeholder="&#30830;&#35748;&#23494;&#30721;" name="server_password_2">
+                        <input type="password" class="form-control" placeholder="&#30830;&#35748;&#23494;&#30721;" name="server_password_2" value="${param.server_password_2}" >
                     </div> 
-
+                    
                     <div class="col-md-12 col-sm-18" style="height: 35px; border-bottom: 3px solid #eee; font-size: 25px; text-align: center">
                         &#35831;&#36873;&#25321;&#20320;&#21487;&#20197;&#25552;&#20379;&#30340;&#26381;&#21153;
-                    </div>                      
-                    <div class="col-md-12 col-sm-18" style="height:54px; text-align: left;">
+                    </div>    
+                    
+                    <%LinkedList<String> competences = (LinkedList<String>) request.getAttribute("competences");
+                    	if (competences != null) { %>
+                                
+  <div class="col-md-12 col-sm-18" style="height:54px; text-align: left;">
 
-                        <input type="checkbox" id="checkbox1" name="server_plane"/>
+                        <input type="checkbox" id="checkbox1" name="competences" value="voiture"/>
                         <label for="checkbox1"><span></span>&#25509;&#26426;&#26381;&#21153;&#65306;&#29992;&#27773;&#36710;&#23558;&#23458;&#25143;&#20174;&#26426;&#22330;&#25509;&#21040;&#20854;&#20303;&#22320;。</label>
                     </div>
                     <div class="col-md-12 col-sm-18" style="height:54px; text-align: left;">
 
-                        <input type="checkbox"  id="checkbox2"  name="client_right" />
+                        <input type="checkbox"  id="checkbox2"  name="competences" value="maison"/>
                         <label for="checkbox2"><span></span>&#25214;&#25151;&#26381;&#21153;&#65306;&#26681;&#25454;&#23458;&#25143;&#35201;&#27714;&#23547;&#25214;&#20986;&#31199;&#25151;&#24182;&#24110;&#21161;&#20854;&#32852;&#31995;&#25151;&#19996;。</label>
                     </div>
                     <div class="col-md-12 col-sm-18" style="height:54px; text-align: left;">
 
-                        <input type="checkbox" id="checkbox3" name="client_right" />
+                        <input type="checkbox" id="checkbox3" name="competences" value="accueil"/>
                         <label for="checkbox3"><span></span>&#22659;&#22806;&#26381;&#21153;&#65306;&#24110;&#21161;&#23458;&#25143;&#22312;&#38134;&#34892;&#24320;&#25143;&#65292;&#20934;&#22791;&#30003;&#35831;&#23398;&#26657;&#30340;&#26448;&#26009;&#65292;&#20934;&#22791;&#23621;&#30041;&#26448;&#26009;&#20197;&#21450;&#31867;&#20284;&#30340;&#34892;&#25919;&#26381;&#21153;。</label>
                     </div>
+                        
+                         	<%}
+                    	
+                	%>
 
                     <div class="col-md-12 col-sm-18" style="height: 35px; border-bottom: 3px solid #eee; font-size: 25px; text-align: center">
                         &#20197;&#19979;&#20026;&#36873;&#22635;&#20449;&#24687;
@@ -207,8 +216,8 @@
                 });
             })();
         </script>
-                    <div class="col-md-12 col-sm-18">
-                        <input type="text" class="form-control" placeholder="&#30005;&#35805;&#21495;&#30721;" name="server_phone">
+                     <div class="col-md-12 col-sm-18">
+                        <input type="text" class="form-control" placeholder="&#30005;&#35805;&#21495;&#30721;" name="telephone" value="${param.telephone}">
                     </div>
 
                     <div class="col-md-12 col-sm-18" style="height: 54px; border-bottom: 3px solid #eee">

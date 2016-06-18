@@ -66,7 +66,7 @@ and open the template in the editor.
 				<span class="icon icon-bar"></span>
 				<span class="icon icon-bar"></span>
 			</button>
-                    <a href="index.html" class="smoothScroll navbar-brand" >Twino</a>
+                    <a href="controleurTache" class="smoothScroll navbar-brand" >Twino</a>
 		</div>
 
 
@@ -103,6 +103,7 @@ and open the template in the editor.
 			<div class="col-md-offset-1 col-md-10 col-sm-12">
 				<form method="post" action="controleurProfil?action=connectera">
                                     <input type="hidden" name="action" value="connectera" />
+                                    
                                     
                                     <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
 						<label> Email    </label> &nbsp;&nbsp;<input class="searchinput" type="text" value="Email" onclick="this.value='';" name="email" id="s" /> <br/><br/>

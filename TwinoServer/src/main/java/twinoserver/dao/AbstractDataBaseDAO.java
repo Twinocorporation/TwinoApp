@@ -27,14 +27,9 @@ public abstract class AbstractDataBaseDAO {
     }
 
     protected Connection getConnection() throws SQLException {
-<<<<<<< HEAD:TwinoServer/src/main/java/com/mycompany/twinoserver/dao/AbstractDataBaseDAO.java
-   
+ 
             return dataSource.getConnection();
-=======
-        return dataSource.getConnection();
-        
-        
->>>>>>> master:TwinoServer/src/main/java/twinoserver/dao/AbstractDataBaseDAO.java
+
     }
 
     /**

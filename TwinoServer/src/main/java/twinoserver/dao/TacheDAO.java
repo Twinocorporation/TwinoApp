@@ -411,7 +411,7 @@ public class TacheDAO extends AbstractDataBaseDAO {
      * paramètre.
      */
     public LinkedList<TacheAtom> search(String[] competences, String dateTot,
-            String dateTard, float latitude, float longitude, float remuneration, int distance, String adresseMailCom) throws DAOException {
+            String dateTard, double latitude, double longitude, float remuneration, int distance, String adresseMailCom) throws DAOException {
         String requeteSQL = "";
         Connection conn = null;
         ResultSet rs = null;
