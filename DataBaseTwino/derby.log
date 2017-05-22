@@ -25,3 +25,4 @@ os.arch=x86_64
 os.version=10.11.4
 derby.system.home=/Users/user/Desktop/TwinoApp/DataBaseTwino
 Chargeur de classe de la base de données démarré - derby.database.classpath = ''
+ 
